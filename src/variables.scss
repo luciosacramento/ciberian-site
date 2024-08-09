@@ -1,0 +1,15 @@
+$font-bold: 600;
+$font-medium:500;
+$cor-verde: #1A3932;
+$cor-dourado-claro: #DFA684;
+$cor-dourado-escuro: #B8764D;
+$cor-branco: #fff;
+$cor-cinza: #767676;
+$cor-cinza-claro: #EAEAEA;
+
+@mixin basic-column() {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+  }

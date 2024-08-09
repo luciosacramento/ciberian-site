@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Confirmação</h1>
+<div mat-dialog-content>
+  <p>{{data.msg}}</p>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <div class="container">
+    <div class="row botoes">
+      <div class="col text-end">
+        <button mat-button (click)="confirmar();">Sim</button>
+        <button mat-button (click)="cancelar();">Não</button>
+      </div>
+    </div>
+  </div>
+</div>

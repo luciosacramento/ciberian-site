@@ -37,9 +37,16 @@
                                 Quem nós somos?
                             </p>
                         </div>
-                    </div>   
+                    </div>
+                    
+                    <div *ngIf="maisEmpresa==false" class="section-content-holder float-right">
+                        <div class="content-wrapper">
+                            <p>A Ciberian é uma empresa brasileira que atua no setor de Tecnologia da Informação e Comunicação. Com mais de 177 serviços entregues, nosso time contribui de forma colaborativa em suas soluções, agregando valor ao negócio dos nossos clientes. Com mais de 17 anos de história, a empresa iniciou seus negócios na capital baiana, posteriormente expandindo para o estado de Sergipe. Nossa qualidade é assegurada por um sólido Código de Ética e Conduta, Política de Segurança da Informação, Programa de Compliance e compromisso com resultados rápidos e efetivos.</p>
+                            <p>Buscamos fazer a diferença, contribuindo no crescimento e bem estar dos nossos profissionais e no desenvolvimento do setor de Tecnologia no Nordeste.</p>
+                        </div>
+                    </div>
 
-                    <!--div class="section-content-holder float-right">
+                    <div *ngIf="maisEmpresa==true" class="section-content-holder float-right">
                         <div class="content-wrapper">
                             <div class="info-text">Our modest list of services to <br> suit all your digital needs</div>
                             <p>&nbsp;</p>
@@ -119,7 +126,15 @@
                             </div>
                             <div class="clear"></div>
                         </div>                                                           
-                    </div-->                                
+                    </div>
+                    
+                    <div class="section-content-holder float-right">
+                        <div class="content-wrapper">
+                            <a id="bt_showHideEmpresa" (click)="showHideEmpresa()">mais</a>
+                        </div>
+                    </div>
+                    
+
                     <div class="clear"></div> 
                 </div>
             </div>

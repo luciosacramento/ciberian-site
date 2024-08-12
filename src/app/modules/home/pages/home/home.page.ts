@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   public formGroup:FormGroup = new FormGroup({});
   private formBuilder: FormBuilder = new FormBuilder();
   public searchTerm: string = '';
+  public maisEmpresa: boolean = false;
 
   constructor(private homeService: HomeService,protected util:Utils) {}
 
@@ -46,6 +47,10 @@ export class HomePage implements OnInit {
 
    
 
+  }
+
+  public showHideEmpresa() {
+    this.maisEmpresa = !this.maisEmpresa;
   }
 
  

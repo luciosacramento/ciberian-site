@@ -39,14 +39,14 @@
                         </div>
                     </div>
                     
-                    <div *ngIf="maisEmpresa==false" class="section-content-holder float-right">
-                        <div class="content-wrapper">
+                    <div  >
+                        <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="open-close-container content-wrapper" >
                             <p>A Ciberian é uma empresa brasileira que atua no setor de Tecnologia da Informação e Comunicação. Com mais de 177 serviços entregues, nosso time contribui de forma colaborativa em suas soluções, agregando valor ao negócio dos nossos clientes. Com mais de 17 anos de história, a empresa iniciou seus negócios na capital baiana, posteriormente expandindo para o estado de Sergipe. Nossa qualidade é assegurada por um sólido Código de Ética e Conduta, Política de Segurança da Informação, Programa de Compliance e compromisso com resultados rápidos e efetivos.</p>
                             <p>Buscamos fazer a diferença, contribuindo no crescimento e bem estar dos nossos profissionais e no desenvolvimento do setor de Tecnologia no Nordeste.</p>
                         </div>
                     </div>
 
-                    <div *ngIf="maisEmpresa==true" class="section-content-holder float-right">
+                    <!--div *ngIf="maisEmpresa==true" class="section-content-holder float-right">
                         <div class="content-wrapper">
                             <div class="info-text">Our modest list of services to <br> suit all your digital needs</div>
                             <p>&nbsp;</p>
@@ -126,11 +126,13 @@
                             </div>
                             <div class="clear"></div>
                         </div>                                                           
-                    </div>
+                    </div-->
                     
                     <div class="section-content-holder float-right">
                         <div class="content-wrapper">
-                            <a id="bt_showHideEmpresa" (click)="showHideEmpresa()">mais</a>
+                            <nav>
+                                <button type="button" (click)="showHideEmpresa()">Toggle Open/Close</button>
+                              </nav>
                         </div>
                     </div>
                     
@@ -729,7 +731,7 @@
                 </div>                        
             </div>
 
-            <!-- Contact --
+            <!-- Contact -->
             <div id="contact" class="section page-split">
                 <div class="section-wrapper block content-1170 center-relative">
                     <div class="bg-holder float-left">
@@ -758,24 +760,28 @@
                             </div>
                             <p>&nbsp;</p>
 
-                            <div class="contact-form">
-                                <p><input id="name" type="text" name="your-name" placeholder="Name"></p>
-                                <p><input id="contact-email" type="email" name="your-email" placeholder="Email"></p>                                    
-                                <p><input id="subject" type="text" name="your-subject" placeholder="Subject"></p>
-                                <p><textarea id="message" name="your-message" placeholder="Message"></textarea></p>
-                                <p class="contact-submit-holder"><input type="submit" value="SEND"></p>                                
-                            </div>  
+                            <form [formGroup]="formGroup" (ngSubmit)="sendMail()" >
+
+                                <div class="contact-form">
+                                    <p><input id="name" type="text" formControlName="nome" placeholder="Nome"></p>
+                                    <p><input id="contact-email" type="email" formControlName="remetente" placeholder="Email"></p>                                    
+                                    <p><input id="subject" type="text" formControlName="assunto" placeholder="Assunto"></p>
+                                    <p><input id="phone" type="text" formControlName="telefone" placeholder="Telefone"></p>
+                                    <p><textarea id="message" formControlName="mensagem" placeholder="Mensagem"></textarea></p>
+                                    <p class="contact-submit-holder">
+                                        <input type="submit" value="ENVIAR">
+                                    </p>                                
+                                </div>  
+
+                            </form>
 
                             <p>&nbsp;</p>
 
-                            <div class="one_half"> 
-                                Flatland! A very small stage in a vast cosmic arena great turbulent clouds encyclopaedia galactica star stuff harvesting
-                            </div>
+                            <div class="one_half" [innerHTML]="configData.endereco"></div>
 
                             <div class="one_half last"> 
-                                Phone: +321 123 456 7 <br> 
-                                E-mail: hello@cocobasic.com <br> 
-                                Website: www.yoursitegoeshere.com <br>
+                                Telefone: {{configData.telefone}} <br> 
+                                E-mail: {{configData.email}} <br> 
                             </div>
                             <div class="clear"></div>                                   
                         </div>                                

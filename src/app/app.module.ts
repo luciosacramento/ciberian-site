@@ -17,6 +17,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { InternaModule } from './modules/interna/interna.module';
 
 registerLocaleData(localePt);
 
@@ -31,7 +32,6 @@ registerLocaleData(localePt);
     ReactiveFormsModule,
     MatIconModule,
     BrowserModule,
-    BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -42,6 +42,7 @@ registerLocaleData(localePt);
       closeButton: true
     }),
     HomeModule,
+    InternaModule,
     HttpClientModule  
   ],
   providers: [

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/core/utils';
@@ -12,11 +11,12 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { InternaService } from '../../interna.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-interna',
+  templateUrl: './interna.page.html',
+  styleUrls: ['./interna.page.scss'],
   animations: [
     trigger('openClose', [
       // ...
@@ -39,7 +39,7 @@ import {
     ]),
   ],
 })
-export class HomePage implements OnInit {
+export class InternaPage implements OnInit {
   public pageData: any = [];
   public lojaList: Loja[] | null = null;
   public configData: any = [];
@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
 
-  constructor(private homeService: HomeService,protected util:Utils) {}
+  constructor(private internaService: InternaService,protected util:Utils) {}
 
   ngOnInit(): void {
     this.getPage();
@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
 
   private getConfig() {
   
-    this.homeService.getConfig().subscribe(
+    this.internaService.getConfig().subscribe(
       {
         next:  (data:any) => {
           this.configData = data; 
@@ -85,7 +85,7 @@ export class HomePage implements OnInit {
   public sendMail() {
 
     if(this.formGroup.valid){
-      this.homeService.sendMail(this.formGroup.value).subscribe(
+      this.internaService.sendMail(this.formGroup.value).subscribe(
         {
           next:  (data:any) => {
             //console.log('Dados obtidos:', data.message);

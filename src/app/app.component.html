@@ -57,23 +57,17 @@
 
   <router-outlet></router-outlet>
 
-  
-        <!-- Footer -->
         <footer class="footer">
           <div class="footer-content center-relative">
               <div class="footer-mail">
-                  <a href="mailto:hello@site.com">hello@cocobasic.com</a>
+                  <a href="mailto:hello@site.com">{{configData.email}}</a>
               </div>
               <div class="footer-number">
-                  <a href="tel:987654321">987.654.321</a>
+                  <a href="tel:{{configData.telefone}}">{{configData.telefone}}</a>
               </div>
-              <div class="footer-info"> 
-                  New York <br> 
-                  Some St. 258 <br> 
-                  United States
-              </div>
+              <div class="footer-info" [innerHTML]="configData.endereco"></div>
 
-              <div class="social-holder"> 
+              <!--div class="social-holder"> 
                   <a href="#">
                       <span class="fa fa-twitter"></span>
                   </a>
@@ -86,10 +80,10 @@
                   <a href="#">
                       <span class="fa fa-dribbble"></span>
                   </a>
-              </div>
+              </div-->
 
               <div class="copyright-holder"> 
-                  © 2018 Cardea HTML Template by <a href="http://cocobasic.com">CocoBasic</a>
+                  © 2024 Ciberian
               </div>
           </div>
       </footer>

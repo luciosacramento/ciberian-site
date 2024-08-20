@@ -5,7 +5,7 @@ import { environment } from 'src/environment/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class InternaService {
 
   constructor(private server: RestService) {}
 

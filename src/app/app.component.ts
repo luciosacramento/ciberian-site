@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
+import { AppComponentService } from './app.component.service';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/core/utils';
@@ -15,8 +17,9 @@ export class AppComponent {
 
   public title:string = 'Ciberian';
   public configData: any = [];
+  public pageList: any = [];
 
-  constructor(private router: Router,private homeService: HomeService) {
+  constructor(private router: Router,private homeService: HomeService, private appService: AppComponentService) {
     
   }
 
@@ -39,12 +42,28 @@ export class AppComponent {
         next:  (data:any) => {
           this.configData = data; 
           console.log('Dados obtidos:', this.configData);
+          this.getPages();
          },
         error:  (erro) => {
           console.error(erro)
         }
       }
     );
+  }
+
+  private getPages() {
+    this.appService.obterPaginas().subscribe(
+      {
+        next:  (data:any) => {
+          console.log('Dados obtidos:', data);
+          this.pageList = data;
+        }
+      }
+    );
+  }
+
+  public getSlug(slug:string):string{
+    return slug.toLowerCase();
   }
   
 }

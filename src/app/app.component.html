@@ -24,30 +24,12 @@
           <div class="menu-holder">
               <nav id="header-main-menu">
                   <ul class="main-menu sm sm-clean">
-                      <li>
-                          <a href="#home">Home</a>
-                      </li>
-                      <li>
-                          <a href="#services">A Empresa</a>
-                      </li>
-                      <li>
-                          <a href="#services">Soluções</a>
-                      </li>
-                      <li>
-                          <a href="#team">Nosso Time</a>
-                      </li>
-                      <li>
-                          <a href="#about">Denúncia</a>
-                      </li>
-                      <li>
-                          <a href="#contact">Contato</a>
-                      </li>
-                      <li>
-                          <a href="#pricing">Política de Privadicade</a>
-                      </li>
-                      <li>
-                          <a href="#skills">Política de Cookies</a>
-                      </li>                                                             
+                      <li *ngFor="let item of pageList; index as i" >
+                          <a *ngIf="!item.pagina_interna;else other_content" [routerLink]="['/home']" fragment="{{item.slug}}">{{item.titulo}}</a>
+                          <ng-template #other_content>
+                              <a  [routerLink]="['/interna/{{item.slug}}']" >{{item.titulo}}</a>
+                          </ng-template>
+                      </li>                                                           
                   </ul>
               </nav>                       
           </div>

@@ -1,12 +1,9 @@
 
 import { Router } from '@angular/router';
 import { AppComponentService } from './app.component.service';
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
-import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Utils } from 'src/app/core/utils';
-import { Loja } from 'src/app/core/interface/loja';
+import { Component } from '@angular/core';
 import { HomeService } from './modules/home/home.service';
+import { DataService } from './core/data.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +16,9 @@ export class AppComponent {
   public configData: any = [];
   public pageList: any = [];
 
-  constructor(private router: Router,private homeService: HomeService, private appService: AppComponentService) {
+  constructor(private router: Router,
+    private appService: AppComponentService, 
+    private dataService: DataService) {
     
   }
 
@@ -37,11 +36,12 @@ export class AppComponent {
 
   private getConfig() {
   
-    this.homeService.getConfig().subscribe(
+    this.appService.getConfig().subscribe(
       {
         next:  (data:any) => {
           this.configData = data; 
           console.log('Dados obtidos:', this.configData);
+          this.dataService.addItem(this.configData);
           this.getPages();
          },
         error:  (erro) => {
@@ -56,6 +56,7 @@ export class AppComponent {
       {
         next:  (data:any) => {
           console.log('Dados obtidos:', data);
+          this.dataService.addItem(data);
           this.pageList = data;
         }
       }

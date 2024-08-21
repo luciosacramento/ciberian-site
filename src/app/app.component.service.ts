@@ -13,6 +13,10 @@ export class AppComponentService {
     return this.server.get(environment.API_url,`paginas`);
   }
 
+  public getConfig(){
+    return this.server.get(environment.API_url,`configuracoes-personalizadas`);
+  }
+
   
 }
 

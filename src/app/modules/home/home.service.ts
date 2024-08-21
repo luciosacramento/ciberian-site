@@ -13,8 +13,4 @@ export class HomeService {
     return this.server.post(environment.API_url,`enviar-email`,value);
   }
 
-  public getConfig(){
-    return this.server.get(environment.API_url,`configuracoes-personalizadas`);
-  }
-
 }

@@ -12,6 +12,8 @@ import {
   transition,
   // ...
 } from '@angular/animations';
+import { AppComponentService } from 'src/app/app.component.service';
+import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-home',
@@ -41,16 +43,20 @@ import {
 })
 export class HomePage implements OnInit {
   public pageData: any = [];
-  public lojaList: Loja[] | null = null;
   public configData: any = [];
   public formGroup:FormGroup = new FormGroup({});
   private formBuilder: FormBuilder = new FormBuilder();
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
 
-  constructor(private homeService: HomeService,protected util:Utils) {}
+  constructor(private homeService: HomeService,protected util:Utils, private appService:AppComponentService, private dataService: DataService) {}
 
   ngOnInit(): void {
+
+    this.dataService.currentDataArray.subscribe(data => {
+      this.configData = data;
+    });
+
     this.getPage();
     this.getConfig();
 
@@ -69,7 +75,7 @@ export class HomePage implements OnInit {
 
   private getConfig() {
   
-    this.homeService.getConfig().subscribe(
+    this.appService.getConfig().subscribe(
       {
         next:  (data:any) => {
           this.configData = data; 

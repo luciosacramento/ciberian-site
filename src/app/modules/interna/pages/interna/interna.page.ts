@@ -12,6 +12,7 @@ import {
   // ...
 } from '@angular/animations';
 import { InternaService } from '../../interna.service';
+import { DataService } from 'src/app/core/data.service';
 
 @Component({
   selector: 'app-interna',
@@ -47,10 +48,16 @@ export class InternaPage implements OnInit {
   private formBuilder: FormBuilder = new FormBuilder();
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
+  public listPages: any[] = [];
 
-  constructor(private internaService: InternaService,protected util:Utils) {}
+  constructor(private internaService: InternaService,protected util:Utils, private dataService: DataService) {}
 
   ngOnInit(): void {
+
+    this.dataService.currentDataArray.subscribe(data => {
+      this.listPages = data;
+    });
+
     this.getPage();
     this.getConfig();
 

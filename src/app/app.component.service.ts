@@ -7,14 +7,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AppComponentService {
-  constructor(private server:RestService) { }
+  constructor(private rest:RestService) { }
 
   public obterPaginas():any {
-    return this.server.get(environment.API_url,`paginas`);
+    return this.rest.get(environment.API_url,`paginas`);
+   // return this.rest.get("http://api-hml.tcm.ba.gov.br", `/portal-servidor/recadastramento/nacionalidades`);
   }
 
   public getConfig(){
-    return this.server.get(environment.API_url,`configuracoes-personalizadas`);
+    return this.rest.get(environment.API_url,`configuracoes-personalizadas`);
+    //return this.rest.get("http://api-hml.tcm.ba.gov.br",`/portal-servidor/recadastramento/escolaridades`);
   }
 
   

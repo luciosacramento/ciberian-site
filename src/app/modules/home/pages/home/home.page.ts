@@ -42,14 +42,15 @@ import { DataService } from 'src/app/core/data.service';
   ],
 })
 export class HomePage implements OnInit {
-  public pageData: any = [];
-  public configData: any = [];
+  public pageData: any = null;
+  public configData: any  = null;
   public formGroup:FormGroup = new FormGroup({});
   private formBuilder: FormBuilder = new FormBuilder();
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
 
-  constructor(private homeService: HomeService,protected util:Utils, private appService:AppComponentService, private dataService: DataService) {}
+  constructor(private homeService: HomeService,protected util:Utils, 
+              private appService:AppComponentService, private dataService: DataService) {}
 
   ngOnInit(): void {
 
@@ -70,22 +71,15 @@ export class HomePage implements OnInit {
   }
 
   private getPage() {
-    
+    this.dataService.currentDataArray.subscribe(data => {
+      this.pageData =  data[1];
+    });
   }
 
   private getConfig() {
-  
-    this.appService.getConfig().subscribe(
-      {
-        next:  (data:any) => {
-          this.configData = data; 
-          console.log('Dados obtidos:', this.configData);
-         },
-        error:  (erro) => {
-          console.error(erro)
-        }
-      }
-    );
+    this.dataService.currentDataArray.subscribe(data => {
+      this.configData =  data[0];
+    });
   }
 
   public sendMail() {

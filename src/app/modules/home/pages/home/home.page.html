@@ -2,7 +2,7 @@
 
 
 
-        <div id="content" class="site-content center-relative">
+        <div *ngIf="pageData && configData" id="content" class="site-content center-relative">
 
             <!-- Home -->    
             <div id="home" class="section full-screen full-width">
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Services --> 
-            <div id="services" class="section page-split">
+            <div id="{{pageData[0].slug}}" class="section page-split">
                 <div class="section-wrapper block content-1170 center-relative">
                     <div class="bg-holder float-left">
                         <div class="split-color"></div>                                
@@ -30,19 +30,17 @@
                                 <img src="/assets/images/01_left.png" alt="">
                             </div>
                             <h2 class="entry-title">
-                                A <br>
-                                EMPRESA
+                               {{pageData[0].titulo}}
                             </h2>
                             <p class="page-desc">
-                                Quem nós somos?
+                                {{pageData[0].resumo}}
                             </p>
                         </div>
                     </div>
                     
                     <div  >
                         <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="open-close-container content-wrapper" >
-                            <p>A Ciberian é uma empresa brasileira que atua no setor de Tecnologia da Informação e Comunicação. Com mais de 177 serviços entregues, nosso time contribui de forma colaborativa em suas soluções, agregando valor ao negócio dos nossos clientes. Com mais de 17 anos de história, a empresa iniciou seus negócios na capital baiana, posteriormente expandindo para o estado de Sergipe. Nossa qualidade é assegurada por um sólido Código de Ética e Conduta, Política de Segurança da Informação, Programa de Compliance e compromisso com resultados rápidos e efetivos.</p>
-                            <p>Buscamos fazer a diferença, contribuindo no crescimento e bem estar dos nossos profissionais e no desenvolvimento do setor de Tecnologia no Nordeste.</p>
+                            {{pageData[0].conteudo}}
                         </div>
                     </div>
 

@@ -23,6 +23,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    
     this.getConfig();
   }
 
@@ -35,12 +36,14 @@ export class AppComponent {
   }
 
   private getConfig() {
+
+    console.log('getConfig:');
   
     this.appService.getConfig().subscribe(
       {
         next:  (data:any) => {
+          console.log('Dados obtidos:', data);
           this.configData = data; 
-          console.log('Dados obtidos:', this.configData);
           this.dataService.addItem(this.configData);
           this.getPages();
          },
@@ -57,6 +60,9 @@ export class AppComponent {
         next:  (data:any) => {
           console.log('Dados obtidos:', data);
           this.dataService.addItem(data);
+          this.dataService.currentDataArray.subscribe(data => {
+            console.log('Dados obtidos 2 :', data);
+          });
           this.pageList = data;
         }
       }

@@ -32,24 +32,18 @@
                             <h2 class="entry-title">
                                {{pageData[0].titulo}}
                             </h2>
-                            <p class="page-desc">
-                                {{pageData[0].resumo}}
-                            </p>
+                            <p class="page-desc" [innerHTML]="pageData[0].resumo"></p>
                         </div>
                     </div>
                     
-                    <div  >
-                        <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="open-close-container content-wrapper" >
-                            {{pageData[0].conteudo}}
-                        </div>
-                    </div>
+                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="open-close-container content-wrapper" [innerHTML]="pageData[0].conteudo" ></div>
 
-                    <!--div *ngIf="maisEmpresa==true" class="section-content-holder float-right">
+                    <div *ngIf="maisEmpresa==true && solucoesList" class="section-content-holder float-right">
                         <div class="content-wrapper">
                             <div class="info-text">Our modest list of services to <br> suit all your digital needs</div>
                             <p>&nbsp;</p>
 
-                            <div class="one_half animate">
+                            <div *ngFor=""  class="one_half animate">
                                 <div class="service-holder">
                                     <div class="service-img"> 
                                         <img src="/assets/images/icon_preciese.png" alt="">
@@ -124,7 +118,7 @@
                             </div>
                             <div class="clear"></div>
                         </div>                                                           
-                    </div-->
+                    </div>
                     
                     <div class="section-content-holder float-right">
                         <div class="content-wrapper">

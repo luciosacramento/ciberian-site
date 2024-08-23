@@ -23,14 +23,10 @@ import { DataService } from 'src/app/core/data.service';
     trigger('openClose', [
       // ...
       state('open', style({
-        height: '200px',
         opacity: 1,
-        backgroundColor: 'yellow'
       })),
       state('closed', style({
-        height: '100px',
         opacity: 0.8,
-        backgroundColor: 'blue'
       })),
       transition('open => closed', [
         animate('0.3s')
@@ -48,6 +44,7 @@ export class HomePage implements OnInit {
   private formBuilder: FormBuilder = new FormBuilder();
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
+  public solucoesList: any | null = null;
 
   constructor(private homeService: HomeService,protected util:Utils, 
               private appService:AppComponentService, private dataService: DataService) {}
@@ -60,6 +57,7 @@ export class HomePage implements OnInit {
 
     this.getPage();
     this.getConfig();
+
 
     this.formGroup = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -80,6 +78,20 @@ export class HomePage implements OnInit {
     this.dataService.currentDataArray.subscribe(data => {
       this.configData =  data[0];
     });
+  }
+
+  public getSolucoes() {
+    this.homeService.getSolucoes().subscribe(
+      {
+        next:  (data:any) => {
+          console.log('Dados obtidos:', data);
+          this.solucoesList = data;
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
   }
 
   public sendMail() {

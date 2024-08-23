@@ -13,4 +13,8 @@ export class HomeService {
     return this.server.post(environment.API_url,`enviar-email`,value);
   }
 
+  public getSolucoes(){
+    return this.server.get(environment.API_url,`solucoes`);
+  }
+
 }

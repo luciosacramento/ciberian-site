@@ -24,15 +24,17 @@ import { DataService } from 'src/app/core/data.service';
       // ...
       state('open', style({
         opacity: 1,
+        display: 'block'
       })),
       state('closed', style({
-        opacity: 0.8,
+        opacity: 0,
+        display: 'none'
       })),
       transition('open => closed', [
-        animate('0.3s')
+        animate('0.6s')
       ]),
       transition('closed => open', [
-        animate('0.3s')
+        animate('0.6s')
       ]),
     ]),
   ],
@@ -57,6 +59,7 @@ export class HomePage implements OnInit {
 
     this.getPage();
     this.getConfig();
+    this.getSolucoes();
 
 
     this.formGroup = this.formBuilder.group({
@@ -84,7 +87,7 @@ export class HomePage implements OnInit {
     this.homeService.getSolucoes().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos:', data);
+          console.log('Dados obtidos solucoesList:', data);
           this.solucoesList = data;
         },
         error:  (erro) => {

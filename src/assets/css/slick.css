@@ -151,7 +151,7 @@
 .slick-next
 {
     right: 0;
-    background-image: url("..//assets/images/opta_arrow@2x.png");
+    background-image: url("../../assets/images/img_01s.jpg");
     background-repeat: no-repeat;
     background-size: 35px 20px;
     background-color: transparent;
@@ -160,7 +160,7 @@
 }
 .slick-prev
 {
-    background-image: url(..//assets/images/opta_arrow@2x_left.png);
+    background-image: url("../../assets/images/img_01s.jpg");
     background-repeat: no-repeat;
     background-size: 35px 20px;
     background-color: transparent;

@@ -32,90 +32,32 @@
                             <h2 class="entry-title">
                                {{pageData[0].titulo}}
                             </h2>
-                            <p class="page-desc" [innerHTML]="pageData[0].resumo"></p>
+                            <div class="three_fourth">
+                                <p class="page-desc" [innerHTML]="pageData[0].resumo"></p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="open-close-container content-wrapper" [innerHTML]="pageData[0].conteudo" ></div>
+                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="section-content-holder float-right" [innerHTML]="pageData[0].conteudo" ></div>
 
-                    <div *ngIf="maisEmpresa==true && solucoesList" class="section-content-holder float-right">
+                    <div [@openClose]="maisEmpresa ? 'closed' : 'open'" *ngIf="solucoesList" class="section-content-holder float-right">
                         <div class="content-wrapper">
                             <div class="info-text">Our modest list of services to <br> suit all your digital needs</div>
                             <p>&nbsp;</p>
 
-                            <div *ngFor=""  class="one_half animate">
+                            <div *ngFor="let item of solucoesList; index as i;"  class="one_half animate" [ngClass]="{'last': i%2==0 }">
                                 <div class="service-holder">
                                     <div class="service-img"> 
-                                        <img src="/assets/images/icon_preciese.png" alt="">
+                                        <img src="{{item.image_url}}" alt="">
                                     </div>
                                     <div class="service-txt">
-                                        <h4>Preciese</h4> 
-                                        Phasellus vel est sem integer suscipit enim quis dictum.
+                                        <h4>{{item.title}}</h4> 
+                                        {{item.description}}
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="one_half last animate">
-                                <div class="service-holder">
-                                    <div class="service-img">
-                                        <img src="/assets/images/icon_support.png" alt="">
-                                    </div>
-                                    <div class="service-txt">
-                                        <h4>Support</h4> 
-                                        Est sem integer suscipit enim quis dictum feugiat curabitur.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-
-                            <div class="one_half animate">
-                                <div class="service-holder">
-                                    <div class="service-img">
-                                        <img src="/assets/images/icon_responsive.png" alt="">
-                                    </div>
-                                    <div class="service-txt">
-                                        <h4>Responsive</h4> 
-                                        Donec vel est sem integer suscipit enim quis lorem.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="one_half last animate">
-                                <div class="service-holder">
-                                    <div class="service-img"> 
-                                        <img src="/assets/images/icon_community.png" alt="">
-                                    </div>
-                                    <div class="service-txt">
-                                        <h4>Community</h4> 
-                                        Lorem integer suscipit enim quis dictum feugiat donec.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-
-                            <div class="one_half animate">
-                                <div class="service-holder">
-                                    <div class="service-img"> 
-                                        <img src="/assets/images/icon_portfolio.png" alt="">
-                                    </div>
-                                    <div class="service-txt">
-                                        <h4>Portfolio</h4> 
-                                        Amet vel est sem integer suscipit enim quis dolor.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="one_half last animate">
-                                <div class="service-holder">
-                                    <div class="service-img">
-                                        <img src="/assets/images/icon_store.png" alt="">
-                                    </div>
-                                    <div class="service-txt">
-                                        <h4>Store</h4> 
-                                        Sem integer suscipit enim quis dictum feugiat suscipit.
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="clear"></div>
                         </div>                                                           
                     </div>

@@ -17,4 +17,8 @@ export class HomeService {
     return this.server.get(environment.API_url,`solucoes`);
   }
 
+  public getColaboradores(){
+    return this.server.get(environment.API_url,`colaboradores`);
+  }
+
 }

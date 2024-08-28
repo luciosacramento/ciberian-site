@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -28,6 +28,8 @@ import { DataService } from 'src/app/core/data.service';
       })),
       state('closed', style({
         opacity: 0,
+        top: '-20000px',
+        position: 'absolute',
         display: 'none'
       })),
       transition('open => closed', [
@@ -47,11 +49,16 @@ export class HomePage implements OnInit {
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
   public solucoesList: any | null = null;
+  public descricaoServico: string | null = null;
+  public colaboradoresList: any | null = null;
+  public descricaoColaborador: string | null = null;
 
   constructor(private homeService: HomeService,protected util:Utils, 
               private appService:AppComponentService, private dataService: DataService) {}
 
   ngOnInit(): void {
+
+    //descricao-service
 
     this.dataService.currentDataArray.subscribe(data => {
       this.configData = data;
@@ -60,7 +67,8 @@ export class HomePage implements OnInit {
     this.getPage();
     this.getConfig();
     this.getSolucoes();
-
+    this.getColaboradores()
+  
 
     this.formGroup = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -97,6 +105,29 @@ export class HomePage implements OnInit {
     );
   }
 
+  //get colaboradores
+  public getColaboradores() {
+    this.homeService.getColaboradores().subscribe(
+      {
+        next:  (data:any) => {
+          console.log('Dados obtidos colaboradores:', data);
+          this.colaboradoresList = data;
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
+  }
+
+  public showDescricao(id: number) {
+    this.descricaoServico = this.solucoesList[id].description;
+  }
+
+  public showDescricaoColaborador(id: number) {
+    this.descricaoColaborador = this.colaboradoresList[id].description;
+  }
+
   public sendMail() {
 
     if(this.formGroup.valid){
@@ -119,6 +150,7 @@ export class HomePage implements OnInit {
 
   public showHideEmpresa() {
     this.maisEmpresa = !this.maisEmpresa;
+    this.descricaoServico  = null
   }
 
  

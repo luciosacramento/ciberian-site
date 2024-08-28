@@ -38,25 +38,25 @@
                         </div>
                     </div>
                     
-                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" class="section-content-holder float-right" [innerHTML]="pageData[0].conteudo" ></div>
+                    <div [@openClose]="maisEmpresa ? 'closed' : 'open'" class="section-content-holder float-right text-justify lh-lg" [innerHTML]="pageData[0].conteudo" ></div>
 
-                    <div [@openClose]="maisEmpresa ? 'closed' : 'open'" *ngIf="solucoesList" class="section-content-holder float-right">
+                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" *ngIf="solucoesList" class="section-content-holder float-right">
                         <div class="content-wrapper">
-                            <div class="info-text">Our modest list of services to <br> suit all your digital needs</div>
-                            <p>&nbsp;</p>
-
+                            
                             <div *ngFor="let item of solucoesList; index as i;"  class="one_half animate" [ngClass]="{'last': i%2==0 }">
-                                <div class="service-holder">
+                                <div >
                                     <div class="service-img"> 
                                         <img src="{{item.image_url}}" alt="">
                                     </div>
                                     <div class="service-txt">
-                                        <h4>{{item.title}}</h4> 
-                                        {{item.description}}
+                                        <h4 (mouseover)="showDescricao(i)" (mouseleave)="showDescricao(-1)">{{item.title}}</h4> 
                                     </div>
                                 </div>
                             </div>
 
+                            <hr/>
+                            
+                            <div class="text-justify" *ngIf="descricaoServico"  [innerHTML]="descricaoServico"></div>
                             
                             <div class="clear"></div>
                         </div>                                                           
@@ -65,14 +65,62 @@
                     <div class="section-content-holder float-right">
                         <div class="content-wrapper">
                             <nav>
-                                <button type="button" (click)="showHideEmpresa()">Toggle Open/Close</button>
-                              </nav>
+                                <button type="button" [ngClass]="{'bt-open': maisEmpresa === false, 'bt-close' : maisEmpresa === true }" (click)="showHideEmpresa()"></button>
+                            </nav>
                         </div>
                     </div>
                     
 
                     <div class="clear"></div> 
                 </div>
+            </div>
+
+             <!-- Team -->
+             <div id="{{pageData[2].slug}}" class="section page-split" *ngIf="colaboradoresList">
+                <div class="section-wrapper block content-1170 center-relative">
+                    <div class="bg-holder float-left">
+                        <div class="split-color"></div>                                
+                    </div>
+                    <div class="sticky-spacer">
+                        <div class="section-title-holder float-left">
+                            <div class="section-top-image"> 
+                                <img src="/assets/images/03_left.png" alt="">
+                            </div>
+                            <h2 class="entry-title"> 
+                                {{pageData[2].titulo}}
+                            </h2>
+                            <p class="page-desc" [innerHTML]="pageData[2].resumo">
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-content-holder float-right">
+                        <div class="content-wrapper">
+                            <div id="team-holder">
+                                <div class="team-load-content-holder"></div>
+                                <div class="text-justify" *ngIf="descricaoColaborador"  [innerHTML]="descricaoColaborador"></div>
+                                <ul class="member-holder-wrapper">
+
+                                    <li *ngFor="let item of colaboradoresList; index as i;"  id="team-member-1" class="member-holder one_half">
+                                        <a class="img-link ajax-member-content" (mouseover)="showDescricaoColaborador(i)"  data-id="1">
+                                            <img class="attachment-post-thumbnail" src="{{item.image_url}}" alt="">
+                                            <div class="member-mask">
+                                                <div class="member-info-holder">
+                                                    <p class="member-name">{{item.title}}</p>
+                                                    <p *ngIf="item.cargo" class="member-position">CEO</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    
+                                </ul>
+                                <div class="clear"></div>                                        
+                            </div>                                    
+                        </div>                                
+                    </div>
+                    <div class="clear"></div>                           
+                </div>                        
             </div>
 
             <!-- Portfolio -- 
@@ -491,7 +539,7 @@
                 </div>                        
             </div>
 
-            <!-- Team --
+            <!-- Team -->
             <div id="team" class="section page-split">
                 <div class="section-wrapper block content-1170 center-relative">
                     <div class="bg-holder float-left">

@@ -98,7 +98,9 @@
                         <div class="content-wrapper">
                             <div id="team-holder">
                                 <div class="team-load-content-holder"></div>
-                                <div class="text-justify" *ngIf="descricaoColaborador"  [innerHTML]="descricaoColaborador"></div>
+
+                                <div class="text-justify" id="descricaoColaborador"  [innerHTML]="descricaoColaborador"></div>
+                                
                                 <ul class="member-holder-wrapper">
 
                                     <li *ngFor="let item of colaboradoresList; index as i;"  id="team-member-1" class="member-holder one_half">
@@ -539,113 +541,7 @@
                 </div>                        
             </div>
 
-            <!-- Team -->
-            <div id="team" class="section page-split">
-                <div class="section-wrapper block content-1170 center-relative">
-                    <div class="bg-holder float-left">
-                        <div class="split-color"></div>                                
-                    </div>
-                    <div class="sticky-spacer">
-                        <div class="section-title-holder float-left">
-                            <div class="section-top-image"> 
-                                <img src="/assets/images/06_left.png" alt="">
-                            </div>
-                            <h2 class="entry-title"> 
-                                MEET <br>OUR <br>TEAM
-                            </h2>
-                            <p class="page-desc">
-                                Get to know us <br>
-                                much better
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="section-content-holder float-right">
-                        <div class="content-wrapper">
-                            <div id="team-holder">
-                                <div class="team-load-content-holder"></div>
-                                <ul class="member-holder-wrapper">
-
-                                    <li id="team-member-1" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" href="team-1.html" data-id="1">
-                                            <img class="attachment-post-thumbnail" src="/assets/images/team_01_large.jpg" alt="">
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">Mark Stone</p>
-                                                    <p class="member-position">CEO</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li id="team-member-2" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" href="team-2.html" data-id="2">
-                                            <img class="attachment-post-thumbnail" src="/assets/images/team_02_large.jpg" alt="" >
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">Kate Stonehold</p>
-                                                    <p class="member-position">DESIGNER</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li id="team-member-3" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" href="team-3.html" data-id="3">
-                                            <img class="attachment-post-thumbnail" src="/assets/images/team_03_large.jpg" alt="" >
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">Terry Jackobs</p>
-                                                    <p class="member-position">CODER</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li id="team-member-4" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" href="team-4.html" data-id="4">
-                                            <img class="attachment-post-thumbnail" src="/assets/images/team_04_large.jpg" alt="" >
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">Jane Perry</p>
-                                                    <p class="member-position">HR</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li id="team-member-5" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" href="team-5.html" data-id="5">
-                                            <img class="attachment-post-thumbnail" src="/assets/images/team_05_large.jpg" alt="" >
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">Peter Williams</p>
-                                                    <p class="member-position">DESIGNER</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li id="team-member-6" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" href="team-6.html" data-id="6">
-                                            <img class="attachment-post-thumbnail" src="/assets/images/team_06_large.jpg" alt="" >
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">John Doe</p>
-                                                    <p class="member-position">MARKETING</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="clear"></div>                                        
-                            </div>                                    
-                        </div>                                
-                    </div>
-                    <div class="clear"></div>                           
-                </div>                        
-            </div>
-
+            
 
             <!-- Clients --
             <div id="clients" class="section full-width">

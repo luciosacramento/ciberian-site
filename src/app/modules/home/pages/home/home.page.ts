@@ -49,9 +49,11 @@ export class HomePage implements OnInit {
   public searchTerm: string = '';
   public maisEmpresa: boolean = false;
   public solucoesList: any | null = null;
+  public documentosList: any | null = null;
   public descricaoServico: string | null = null;
   public colaboradoresList: any | null = null;
   public descricaoColaborador: string | null = null;
+  public descricaoSolucao: string | null = null;
 
   constructor(private homeService: HomeService,protected util:Utils, 
               private appService:AppComponentService, private dataService: DataService) {}
@@ -67,6 +69,7 @@ export class HomePage implements OnInit {
     this.getPage();
     this.getConfig();
     this.getSolucoes();
+    this.getDocumentos();
     this.getColaboradores()
   
 
@@ -82,6 +85,7 @@ export class HomePage implements OnInit {
   private getPage() {
     this.dataService.currentDataArray.subscribe(data => {
       this.pageData =  data[1];
+      this.descricaoSolucao = this.pageData[0].conteudo;
     });
   }
 
@@ -97,6 +101,20 @@ export class HomePage implements OnInit {
         next:  (data:any) => {
           console.log('Dados obtidos solucoesList:', data);
           this.solucoesList = data;
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
+  }
+
+  public getDocumentos() {
+    this.homeService.getDocumentos().subscribe(
+      {
+        next:  (data:any) => {
+          console.log('Dados obtidos Documentos:', data);
+          this.documentosList = data;
         },
         error:  (erro) => {
           console.error(erro)
@@ -121,11 +139,15 @@ export class HomePage implements OnInit {
   }
 
   public showDescricao(id: number) {
-    this.descricaoServico = this.solucoesList[id].description;
+    this.descricaoServico = this.documentosList[id].description;
   }
 
   public showDescricaoColaborador(id: number) {
     this.descricaoColaborador = this.colaboradoresList[id].description;
+  }
+  
+  public showSolucaoDescricao(id: number) {
+    this.descricaoSolucao = this.solucoesList[id].description;
   }
 
   public sendMail() {

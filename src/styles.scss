@@ -506,6 +506,10 @@ body .sm-clean li.current_page_item > a {
     background-color: $color-dourado;
 }
 
+#contato .split-color {
+    background-color: $color-dourado;
+}
+
 #nosso-time  {
     background-color: $color-cinza-claro;
     color: #333B51;
@@ -1485,7 +1489,7 @@ footer ul {
     background-repeat: no-repeat;
     background-size: auto;
     background-position: center top;
-    background-color: #000;
+    background-color: $color-dourado;
 }
 
 .footer-content {

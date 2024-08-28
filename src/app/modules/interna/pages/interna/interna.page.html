@@ -1,54 +1,9 @@
 <div id="content" class="site-content center-relative">        
-                <div class="portfolio-item-wrapper center-relative">
-                    <div class="portfolio-content">
-                        <div class="info-text">Two ghostly white figures in coveralls and helmets are softly dancing.</div>
-                        <p>
-                            <iframe src="https://player.vimeo.com/video/199192931" width="640" height="360" allowfullscreen></iframe>
-                        </p>
-                        <p>&nbsp;</p>
-                        <div class="one_half">
-                            <div class="service-holder">
-                                <div class="service-img"> 
-                                    <img src="images/icon_preciese.png" alt="">
-                                </div>
-                                <div class="service-txt">
-                                    <h4>Preciese</h4> 
-                                    Phasellus vel est sem integer suscipit enim quis dictum.
-                                </div>
-                            </div>
-
-                            <div class="service-holder">
-                                <div class="service-img"> 
-                                    <img src="images/icon_responsive.png" alt="">
-                                </div>
-                                <div class="service-txt">
-                                    <h4>Responsive</h4> 
-                                    Donec vel est sem integer suscipit enim quis lorem.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="one_half last">
-                            <div class="service-holder">
-                                <div class="service-img">
-                                    <img src="images/icon_portfolio.png" alt="">
-                                </div>
-                                <div class="service-txt">
-                                    <h4>Portfolio</h4> 
-                                    Amet vel est sem integer suscipit enim quis dolor.
-                                </div>
-                            </div>
-                            <div class="service-holder">
-                                <div class="service-img"> 
-                                    <img src="images/icon_support.png" alt="">
-                                </div>
-                                <div class="service-txt">
-                                    <h4>Support</h4> 
-                                    Est sem integer suscipit enim quis dictum feugiat curabitur.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>                            
-                    </div>                     
-                </div>
-            </div>
+    <div class="portfolio-item-wrapper center-relative">
+        <div class="portfolio-content">  
+            <div class="info-text">{{pageData.title}}</div>                     
+            <div [innerHTML]="pageData.conteudo"></div>
+            <div class="clear"></div>                            
+        </div>                     
+    </div>
+</div>

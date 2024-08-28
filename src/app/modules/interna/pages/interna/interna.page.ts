@@ -13,6 +13,7 @@ import {
 } from '@angular/animations';
 import { InternaService } from '../../interna.service';
 import { DataService } from 'src/app/core/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-interna',
@@ -50,15 +51,20 @@ export class InternaPage implements OnInit {
   public maisEmpresa: boolean = false;
   public listPages: any[] = [];
 
-  constructor(private internaService: InternaService,protected util:Utils, private dataService: DataService) {}
+  constructor(private route:ActivatedRoute, private internaService: InternaService,protected util:Utils, private dataService: DataService) {}
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      const cod = params['cod'];
+      this.getPage(cod);
+      console.log('Parâmetro cod:', cod);
+    });
 
     this.dataService.currentDataArray.subscribe(data => {
       this.listPages = data;
     });
 
-    this.getPage();
     this.getConfig();
 
     this.formGroup = this.formBuilder.group({
@@ -70,8 +76,10 @@ export class InternaPage implements OnInit {
     });
   }
 
-  private getPage() {
-    
+  private getPage(cod:number) {
+    this.dataService.currentDataArray.subscribe(data => {
+      this.pageData =  data[cod];
+    });
   }
 
   private getConfig() {

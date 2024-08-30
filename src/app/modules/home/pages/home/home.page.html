@@ -106,29 +106,15 @@
                         <div class="content-wrapper">
 
                             <div class="one_half">
-                                <script>
-                                    var textSlider1_speed = "2000";
-                                    var textSlider1_auto = "true";
-                                    var textSlider1_hover = "true";
-                                </script>
-                                    <div class="text-slider-header-quotes"></div>
-                                <div class="text-slider-wrapper relative">
-    
-                                    <div id="textSlider1" class="owl-carousel owl-theme image-slider slider">
-                                            
-                                            <div *ngFor="let itens of solucoesList; index as h;" class="owl-item">
+                                    <div id="" class="">
+                                            <div *ngFor="let itens of solucoesList; index as h;" class=`owl-item slide-${h}`>
                                                 <div   *ngFor="let item of itens; index as i;"  [ngClass]="{'last': i%2==0 }">
                                                     {{item.title}}                                                                                   
-                                            </div>   
-    
-                                    </div>
-                                    </div>
-                                    </div>
-                            
-
-                                   
+                                                </div>   
+                                            </div>
+                                    </div>     
                             <div class="text-justify" *ngIf="descricaoServico"  [innerHTML]="descricaoServico"></div>
-                            
+
                             <div class="clear"></div>
                         </div>                                                           
                     </div>

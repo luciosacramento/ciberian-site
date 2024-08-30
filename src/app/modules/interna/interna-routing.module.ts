@@ -4,11 +4,7 @@ import { InternaPage } from './pages/interna/interna.page';
 
 const routes: Routes = [
   {
-    path:"politica-de-privacidade",
-    component: InternaPage,
-  },
-  {
-    path:"politica-de-cookie",
+    path:"",
     component: InternaPage,
   }
 

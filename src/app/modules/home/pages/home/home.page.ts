@@ -85,7 +85,7 @@ export class HomePage implements OnInit {
   private getPage() {
     this.dataService.currentDataArray.subscribe(data => {
       this.pageData =  data[1];
-      this.descricaoSolucao = this.pageData[0].conteudo;
+      this.descricaoSolucao = this.pageData[1].conteudo;
     });
   }
 
@@ -100,13 +100,25 @@ export class HomePage implements OnInit {
       {
         next:  (data:any) => {
           console.log('Dados obtidos solucoesList:', data);
-          this.solucoesList = data;
+          this.solucoesList = this.splitIntoChunks(data, 3);
+          console.log('this.solucoesList:', this.solucoesList);
         },
         error:  (erro) => {
           console.error(erro)
         }
       }
     );
+  }
+
+  private splitIntoChunks(data: any[], chunkSize: number): any[][] {
+    const chunks: any[][] = [];
+  
+    for (let i = 0; i < data.length; i += chunkSize) {
+      const chunk = data.slice(i, i + chunkSize);
+      chunks.push(chunk);
+    }
+  
+    return chunks;
   }
 
   public getDocumentos() {
@@ -161,7 +173,8 @@ export class HomePage implements OnInit {
             
            },
           error:  (erro) => {
-            console.error(erro)
+            console.error(erro.error.message)
+            this.util.exibirErro(erro.error.message);
           }
         }
       );

@@ -8,6 +8,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
 
     constructor(@Inject(Injector) private readonly injector: Injector) {
+        console.log('GlobalErrorHandler constructor');
     }
 
     handleError(error: any): void {
@@ -15,6 +16,8 @@ export class GlobalErrorHandler implements ErrorHandler {
     }
 
     tratarErro(err:any): void {
+
+        console.log('Erro:', err);
 
         //Extrai o "rejection" do erro, caso exista(ex.:)
         if (err.rejection) {

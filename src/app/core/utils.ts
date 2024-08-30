@@ -24,7 +24,7 @@ export class Utils {
     }
     //Formatada para mensagens de erro
     exibirErro(msg: string) {
-        setTimeout(() => this.toastr.error(msg, ''));
+        this.toastr.error(msg, '');
 
     }
     //Mensagens de alerta(ex.: sua senha expirará em 2 dias)

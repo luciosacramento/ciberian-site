@@ -22,9 +22,9 @@
               <nav id="header-main-menu">
                   <ul class="main-menu sm sm-clean">
                       <li *ngFor="let item of pageList; index as i" >
-                          <a *ngIf="!item.pagina_interna;else other_content" [routerLink]="['/home']" fragment="{{item.slug}}">{{item.titulo}}</a>
+                          <a *ngIf="item.pagina_interna == false;else other_content" [routerLink]="['/home']" fragment="{{item.slug}}">{{item.titulo }}</a>
                           <ng-template #other_content>
-                              <a  [routerLink]="['/interna/{{item.slug}}', i]" >{{item.titulo}}</a>
+                              <a  [routerLink]="['/interna/', i]" >{{item.titulo}}</a>
                           </ng-template>
                       </li>                                                           
                   </ul>
@@ -38,28 +38,8 @@
 
         <footer class="footer">
           <div class="footer-content center-relative">
-              <div class="footer-mail">
-                  <a href="mailto:hello@site.com">{{configData.email}}</a>
-              </div>
-              <div class="footer-number">
-                  <a href="tel:{{configData.telefone}}">{{configData.telefone}}</a>
-              </div>
-              <div class="footer-info" [innerHTML]="configData.endereco"></div>
-
-              <!--div class="social-holder"> 
-                  <a href="#">
-                      <span class="fa fa-twitter"></span>
-                  </a>
-                  <a href="#">
-                      <span class="fa fa-facebook"></span>
-                  </a>
-                  <a href="#">
-                      <span class="fa fa-behance"></span>
-                  </a>
-                  <a href="#">
-                      <span class="fa fa-dribbble"></span>
-                  </a>
-              </div-->
+             <img src="{{configData.marca}}">
+              
 
               <div class="copyright-holder"> 
                   © 2024 Ciberian

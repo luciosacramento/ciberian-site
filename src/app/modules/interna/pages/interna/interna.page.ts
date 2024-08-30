@@ -55,10 +55,12 @@ export class InternaPage implements OnInit {
 
   ngOnInit(): void {
 
+    console.log('Iniciando página interna');
+
     this.route.params.subscribe(params => {
-      const cod = params['cod'];
+      const cod = params['id'];
       this.getPage(cod);
-      console.log('Parâmetro cod:', cod);
+      console.log('Parâmetro cod:', params);
     });
 
     this.dataService.currentDataArray.subscribe(data => {
@@ -78,7 +80,8 @@ export class InternaPage implements OnInit {
 
   private getPage(cod:number) {
     this.dataService.currentDataArray.subscribe(data => {
-      this.pageData =  data[cod];
+      this.pageData =  data[1][cod];
+      console.log('pageData:', this.pageData);
     });
   }
 

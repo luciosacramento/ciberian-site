@@ -78,6 +78,7 @@
                 </div>
             </div>
 
+
             <!-- Solucoes --> 
             <div id="{{pageData[1].slug}}" class="section page-split">
                 <div class="section-wrapper block content-1170 center-relative">
@@ -103,28 +104,31 @@
                     
                     <div *ngIf="solucoesList" class="section-content-holder float-right">
                         <mat-divider class="mb-2 d-block"></mat-divider>
-                        <div class="content-wrapper">
+                        <div class="content-wrapper w-100">
 
-                            <div class="one_half">
-                                    
-                                
                                 <owl-carousel-o [options]="customOptions">
                                     <ng-container *ngFor="let slide of solucoesList; index as h">
                                       <ng-template carouselSlide>
-                                        <div class="owl-item slide-{{h}}">
-                                          <div *ngFor="let item of slide; index as i;" [ngClass]="{'last': i%2==0}">
-                                            {{item.title}}
+                                        <div class="slide-{{h}}">
+                                          <div *ngFor="let item of slide; index as i;"  class="one_half animate" [ngClass]="{'last': i%2==0 }">
+                                            <div class="d-flex align-items-start" >
+                                                <div class="service-img"> 
+                                                    <img src="{{item.image_url}}" alt="">
+                                                </div>
+                                                <div class="service-txt">
+                                                    <h4 (mouseover)="showSolucaoDescricao(h,i)">{{item.title}}</h4> 
+                                                </div>
+                                            </div>
                                           </div>
                                         </div>
                                       </ng-template>
                                     </ng-container>
-                                  </owl-carousel-o>        
-
-
+                                  </owl-carousel-o>     
+                                  
                             <div class="text-justify" *ngIf="descricaoServico"  [innerHTML]="descricaoServico"></div>
 
                             <div class="clear"></div>
-                        </div>                                                           
+                                                    
                     </div>
    
                     
@@ -132,6 +136,7 @@
                     <div class="clear"></div> 
                 </div>
             </div>
+        </div>
 
              <!-- Team -->
              <div id="{{pageData[2].slug}}" class="section page-split" *ngIf="colaboradoresList">

@@ -66,10 +66,10 @@ export class HomePage implements OnInit {
         items: 1
       },
       600: {
-        items: 2
+        items: 1
       },
       1000: {
-        items: 3
+        items: 1
       }
     }
   };
@@ -104,7 +104,9 @@ export class HomePage implements OnInit {
   private getPage() {
     this.dataService.currentDataArray.subscribe(data => {
       this.pageData =  data[1];
-      this.descricaoSolucao = this.pageData[1].conteudo;
+      if(this.pageData){
+        this.descricaoSolucao = this.pageData[1].conteudo;
+      }
     });
   }
 
@@ -119,7 +121,7 @@ export class HomePage implements OnInit {
       {
         next:  (data:any) => {
           console.log('Dados obtidos solucoesList:', data);
-          this.solucoesList = this.splitIntoChunks(data, 3);
+          this.solucoesList = this.splitIntoChunks(data, 6);
           console.log('this.solucoesList:', this.solucoesList);
         },
         error:  (erro) => {
@@ -177,8 +179,10 @@ export class HomePage implements OnInit {
     this.descricaoColaborador = this.colaboradoresList[id].description;
   }
   
-  public showSolucaoDescricao(id: number) {
-    this.descricaoSolucao = this.solucoesList[id].description;
+  public showSolucaoDescricao(idPai:number, id: number) {
+    console.log('id:', id);
+    console.log('this.solucoesList[id]:', this.solucoesList[id]);
+    this.descricaoSolucao = this.solucoesList[idPai][id].description;
   }
 
   public sendMail() {
@@ -199,6 +203,7 @@ export class HomePage implements OnInit {
       );
     }else{
       console.log('Formulário inválido');
+      this.util.exibirErro("Formulário incompleto");
     }
   }
 

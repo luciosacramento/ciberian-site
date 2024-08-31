@@ -23,6 +23,7 @@
     "@angular/router": "^16.1.0",
     "bootstrap": "^5.3.1",
     "moment": "^2.29.4",
+    "ngx-owl-carousel-o": "^18.0.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -1973,3 +1973,32 @@ footer ul {
     }
 
 }
+
+/* ===================================
+    CAROUSEL OWL CSS
+====================================== */
+
+.owl-carousel .owl-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* ajuste conforme necessário */
+  }
+  
+  .owl-dots {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .owl-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  .owl-dot.active {
+    background-color: #000; /* cor da bolinha ativa */
+  }

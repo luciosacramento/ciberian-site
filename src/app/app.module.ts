@@ -18,6 +18,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { InternaModule } from './modules/interna/interna.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 registerLocaleData(localePt);
 
@@ -43,7 +44,7 @@ registerLocaleData(localePt);
     }),
     HomeModule,
     InternaModule,
-    HttpClientModule  
+    HttpClientModule,
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt' },

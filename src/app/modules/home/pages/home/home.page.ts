@@ -3,7 +3,6 @@ import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/core/utils';
-import { Loja } from 'src/app/core/interface/loja';
 import {
   trigger,
   state,
@@ -14,6 +13,7 @@ import {
 } from '@angular/animations';
 import { AppComponentService } from 'src/app/app.component.service';
 import { DataService } from 'src/app/core/data.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-home',
@@ -54,6 +54,25 @@ export class HomePage implements OnInit {
   public colaboradoresList: any | null = null;
   public descricaoColaborador: string | null = null;
   public descricaoSolucao: string | null = null;
+
+  public customOptions: OwlOptions = {
+    loop: true,
+    margin: 10,
+    nav: false,
+    dots: true,
+    dotsEach: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 2
+      },
+      1000: {
+        items: 3
+      }
+    }
+  };
 
   constructor(private homeService: HomeService,protected util:Utils, 
               private appService:AppComponentService, private dataService: DataService) {}

@@ -75,7 +75,8 @@ export class HomePage implements OnInit {
   };
 
   constructor(private homeService: HomeService,protected util:Utils, 
-              private appService:AppComponentService, private dataService: DataService) {}
+              private appService:AppComponentService, private dataService: DataService,
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
 
@@ -92,12 +93,12 @@ export class HomePage implements OnInit {
     this.getColaboradores()
   
 
-    this.formGroup = this.formBuilder.group({
-      nome: ['', Validators.required],
-      remetente: ['', Validators.required],
-      telefone: [''],
-      mensagem: [''],
-      assunto: ['']
+    this.formGroup = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      remetente: ['', [Validators.required, Validators.email]],
+      assunto: ['', [Validators.required]],
+      telefone: ['', [Validators.required, Validators.pattern(/^\d+$/)]], // Exemplo de regex para números
+      mensagem: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
@@ -187,24 +188,34 @@ export class HomePage implements OnInit {
 
   public sendMail() {
 
-    if(this.formGroup.valid){
-      this.homeService.sendMail(this.formGroup.value).subscribe(
-        {
-          next:  (data:any) => {
-            //console.log('Dados obtidos:', data.message);
-            this.util.exibirSucesso(data.message);
-            
-           },
-          error:  (erro) => {
-            console.error(erro.error.message)
-            this.util.exibirErro(erro.error.message);
+    if (this.formGroup.valid) {
+      // Lógica para enviar o email
+      if(this.formGroup.valid){
+        this.homeService.sendMail(this.formGroup.value).subscribe(
+          {
+            next:  (data:any) => {
+              //console.log('Dados obtidos:', data.message);
+              this.util.exibirSucesso(data.message);
+              
+             },
+            error:  (erro) => {
+              console.error(erro.error.message)
+              this.util.exibirErro(erro.error.message);
+            }
           }
-        }
-      );
-    }else{
-      console.log('Formulário inválido');
-      this.util.exibirErro("Formulário incompleto");
+        );
+      }else{
+        this.util.exibirErro("Formulário incompleto");
+      }
+    } else {
+      this.formGroup.markAllAsTouched(); // Marca todos os campos como "touched" para exibir os erros
     }
+
+  }
+
+  // Função para facilitar a exibição de mensagens de erro
+  hasError(field: string, errorType: string) {
+    return this.formGroup.get(field)?.hasError(errorType) && this.formGroup.get(field)?.touched;
   }
 
   public showHideEmpresa() {

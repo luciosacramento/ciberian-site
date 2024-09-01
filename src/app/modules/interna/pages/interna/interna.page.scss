@@ -1,17 +1,18 @@
 @import '/src/variables.scss';
 
-
-
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 700,
-  'GRAD' 0,
-  'opsz' 48
+.contact-form input[type=text], .contact-form input[type=email], .contact-form textarea {
+  color: $color-dark-grey;
+  background-color: transparent;
+  border-bottom: 1px solid $color-dark-grey;
 }
 
-#bt_showHideEmpresa{
-    color: #fff;
+.contact-form input[type=text]::placeholder, .contact-form input[type=email]::placeholder, .contact-form textarea::placeholder
+{
+  color: $color-dark-grey;
+}
+
+input[type="submit"] {
+  color:$color-dark-grey; /* Defina a cor do texto (ajuste conforme necessário) */
+  background-color: transparent; /* Fundo do botão */
 }
 

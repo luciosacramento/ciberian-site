@@ -9,8 +9,8 @@ export class InternaService {
 
   constructor(private server: RestService) {}
 
-  public sendMail(value:Array<any>){
-    return this.server.post(environment.API_url,`enviar-email`,value);
+  public sendDenuncia(value:Array<any>){
+    return this.server.post(environment.API_url,`enviar-denuncia`,value);
   }
 
   public getConfig(){

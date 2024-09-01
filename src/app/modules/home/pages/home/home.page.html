@@ -216,14 +216,44 @@
                             <form [formGroup]="formGroup" (ngSubmit)="sendMail()" >
 
                                 <div class="contact-form">
-                                    <p><input id="name" type="text" formControlName="nome" placeholder="Nome"></p>
-                                    <p><input id="contact-email" type="email" formControlName="remetente" placeholder="Email"></p>                                    
-                                    <p><input id="subject" type="text" formControlName="assunto" placeholder="Assunto"></p>
-                                    <p><input id="phone" type="text" formControlName="telefone" placeholder="Telefone"></p>
-                                    <p><textarea id="message" formControlName="mensagem" placeholder="Mensagem"></textarea></p>
+                                    <!-- Nome -->
+                                    <p>
+                                        <input id="name" type="text" formControlName="nome" placeholder="Nome">
+                                        <small *ngIf="hasError('nome', 'required')">Nome é obrigatório.</small>
+                                        <small *ngIf="hasError('nome', 'minlength')">Nome deve ter no mínimo 3 caracteres.</small>
+                                    </p>
+                                
+                                    <!-- Email -->
+                                    <p>
+                                        <input id="contact-email" type="email" formControlName="remetente" placeholder="Email">
+                                        <small *ngIf="hasError('remetente', 'required')">Email é obrigatório.</small>
+                                        <small *ngIf="hasError('remetente', 'email')">Email inválido.</small>
+                                    </p>
+                                
+                                    <!-- Assunto -->
+                                    <p>
+                                        <input id="subject" type="text" formControlName="assunto" placeholder="Assunto">
+                                        <small *ngIf="hasError('assunto', 'required')">Assunto é obrigatório.</small>
+                                    </p>
+                                
+                                    <!-- Telefone -->
+                                    <p>
+                                        <input id="phone" type="text" formControlName="telefone" placeholder="Telefone">
+                                        <small *ngIf="hasError('telefone', 'required')">Telefone é obrigatório.</small>
+                                        <small *ngIf="hasError('telefone', 'pattern')">Telefone deve conter apenas números.</small>
+                                    </p>
+                                
+                                    <!-- Mensagem -->
+                                    <p>
+                                        <textarea id="message" formControlName="mensagem" placeholder="Mensagem"></textarea>
+                                        <small *ngIf="hasError('mensagem', 'required')">Mensagem é obrigatória.</small>
+                                        <small *ngIf="hasError('mensagem', 'minlength')">Mensagem deve ter no mínimo 10 caracteres.</small>
+                                    </p>
+                                
+                                    <!-- Botão de Enviar -->
                                     <p class="contact-submit-holder">
                                         <input type="submit" value="ENVIAR">
-                                    </p>                                
+                                    </p>                             
                                 </div>  
 
                             </form>

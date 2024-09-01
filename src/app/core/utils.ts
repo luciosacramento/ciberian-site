@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { AguardeDialog } from "../shared/dialogs/aguarde/aguarde.dialog";
 import { ConfirmacaoDialog } from "../shared/dialogs/confirmacao/confirmacao.dialog";
+import { DomSanitizer } from "@angular/platform-browser";
 
 type SortDirection = 'asc' | 'desc';
 
@@ -13,7 +14,9 @@ type SortDirection = 'asc' | 'desc';
 export class Utils {
    
 
-    constructor(protected route: ActivatedRoute, protected router: Router,private toastr: ToastrService,public dialog: MatDialog) {
+    constructor(protected route: ActivatedRoute, protected router: Router,
+                private toastr: ToastrService,public dialog: MatDialog,
+                private sanitizer: DomSanitizer) {
 
     }
 
@@ -173,6 +176,10 @@ export class Utils {
 
 
         return dialogRef;
+    }
+
+    public sanitize(str:string) {
+        return this.sanitizer.bypassSecurityTrustHtml(str);
     }
 
 }

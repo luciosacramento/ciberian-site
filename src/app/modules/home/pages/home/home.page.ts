@@ -223,6 +223,10 @@ export class HomePage implements OnInit {
     this.descricaoServico  = null
   }
 
+  public sanitize(str:string) {
+    return this.util.sanitize(str);
+  }
+
  
   
 }

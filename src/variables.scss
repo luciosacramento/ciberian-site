@@ -1,15 +1,9 @@
-$font-bold: 600;
-$font-medium:500;
-$cor-verde: #1A3932;
-$cor-dourado-claro: #DFA684;
-$cor-dourado-escuro: #B8764D;
-$cor-branco: #fff;
-$cor-cinza: #767676;
-$cor-cinza-claro: #EAEAEA;
-
-@mixin basic-column() {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin: 0 auto;
-  }
+//variables colors
+$color-primary: #000000;
+$color-secondary: #98A4AB;
+$color-grey: #98A4AB;
+$color-dark-grey: #333B51;
+$color-dark-grey-2: #222221;
+$color-dourado: #B7B497;
+$color-cinza-medio: #DDDDDD;
+$color-cinza-claro: #EBEBEB;

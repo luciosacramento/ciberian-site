@@ -15,6 +15,7 @@ export class AppComponent {
   public title:string = 'Ciberian';
   public configData: any = [];
   public pageList: any = [];
+  public showMenu: boolean = false;
 
   constructor(private router: Router,
     private appService: AppComponentService, 
@@ -71,6 +72,10 @@ export class AppComponent {
 
   public getSlug(slug:string):string{
     return slug.toLowerCase();
+  }
+
+  public showMenuMobile(){
+    this.showMenu = !this.showMenu;
   }
   
 }

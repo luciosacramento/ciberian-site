@@ -1,9 +1,52 @@
 <div id="content" class="site-content center-relative">        
     <div class="interna-item-wrapper center-relative">
         <div class="interna-content">  
-            <div class="info-text">{{pageData.titulo}}</div>                     
-            <div [innerHTML]="pageData.conteudo"></div>
-            <div class="clear"></div>                            
+            <div class="info-text" [innerHTML]="sanitize(pageData.titulo)" ></div>                     
+            <div [innerHTML]="sanitize(pageData.conteudo)"></div>
+            <div class="clear"></div> 
+            
+            <div *ngIf="slug == 'denuncia'">
+
+                <h3 class="text-center">Preencha o formulário se você tem uma denúncia ou dúvida!</h3>
+
+                <p class="text-center">OS DADOS PESSOAIS são OPCIONAIS</p>
+
+                <div class="denuncia-form">
+                    <form *ngIf="denunciaForm" [formGroup]="denunciaForm" (ngSubmit)="enviarDenuncia()">
+
+                        <div class="contact-form">
+                            <div>
+                              <input id="nome" type="text" formControlName="nome" placeholder="Nome"/>
+                            </div>
+                          
+                            <div>
+                              <input id="sobrenome" type="text" formControlName="sobrenome"  placeholder="Sobrenome"/>
+                            </div>
+                          
+                            <div>
+                              <input id="email" type="email" formControlName="email" placeholder="E-mail"/>
+                              <div *ngIf="denunciaForm.get('email')?.invalid && denunciaForm.get('email')?.touched">
+                                <small class="error">Por favor, insira um e-mail válido.</small>
+                              </div>
+                            </div>
+                          
+                            <div>
+                              <textarea id="comentario" rows="4" formControlName="comentario" placeholder="Comentário ou Mensagem"></textarea>
+                              <div *ngIf="denunciaForm.get('comentario')?.invalid && denunciaForm.get('comentario')?.touched">
+                                <small class="error">O comentário é obrigatório.</small>
+                              </div>
+                            </div>
+
+                            <p class="contact-submit-holder">
+                                <input type="submit" value="Enviar Denúncia"/>
+                            </p> 
+   
+                        </div>
+                      
+                      </form>
+                </div>
+            </div>
+            
         </div>                     
     </div>
 </div>

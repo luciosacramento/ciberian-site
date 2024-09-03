@@ -66,16 +66,17 @@ export class HomePage implements OnInit {
         items: 1
       },
       600: {
-        items: 2
+        items: 1
       },
       1000: {
-        items: 3
+        items: 1
       }
     }
   };
 
   constructor(private homeService: HomeService,protected util:Utils, 
-              private appService:AppComponentService, private dataService: DataService) {}
+              private appService:AppComponentService, private dataService: DataService,
+              private fb: FormBuilder) {}
 
   ngOnInit(): void {
 
@@ -92,19 +93,21 @@ export class HomePage implements OnInit {
     this.getColaboradores()
   
 
-    this.formGroup = this.formBuilder.group({
-      nome: ['', Validators.required],
-      remetente: ['', Validators.required],
-      telefone: [''],
-      mensagem: [''],
-      assunto: ['']
+    this.formGroup = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      remetente: ['', [Validators.required, Validators.email]],
+      assunto: ['', [Validators.required]],
+      telefone: ['', [Validators.required, Validators.pattern(/^\d+$/)]], // Exemplo de regex para números
+      mensagem: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
   private getPage() {
     this.dataService.currentDataArray.subscribe(data => {
       this.pageData =  data[1];
-      this.descricaoSolucao = this.pageData[1].conteudo;
+      if(this.pageData){
+        this.descricaoSolucao = this.pageData[1].conteudo;
+      }
     });
   }
 
@@ -119,7 +122,7 @@ export class HomePage implements OnInit {
       {
         next:  (data:any) => {
           console.log('Dados obtidos solucoesList:', data);
-          this.solucoesList = this.splitIntoChunks(data, 3);
+          this.solucoesList = this.splitIntoChunks(data, 6);
           console.log('this.solucoesList:', this.solucoesList);
         },
         error:  (erro) => {
@@ -177,34 +180,51 @@ export class HomePage implements OnInit {
     this.descricaoColaborador = this.colaboradoresList[id].description;
   }
   
-  public showSolucaoDescricao(id: number) {
-    this.descricaoSolucao = this.solucoesList[id].description;
+  public showSolucaoDescricao(idPai:number, id: number) {
+    console.log('id:', id);
+    console.log('this.solucoesList[id]:', this.solucoesList[id]);
+    this.descricaoSolucao = this.solucoesList[idPai][id].description;
   }
 
   public sendMail() {
 
-    if(this.formGroup.valid){
-      this.homeService.sendMail(this.formGroup.value).subscribe(
-        {
-          next:  (data:any) => {
-            //console.log('Dados obtidos:', data.message);
-            this.util.exibirSucesso(data.message);
-            
-           },
-          error:  (erro) => {
-            console.error(erro.error.message)
-            this.util.exibirErro(erro.error.message);
+    if (this.formGroup.valid) {
+      // Lógica para enviar o email
+      if(this.formGroup.valid){
+        this.homeService.sendMail(this.formGroup.value).subscribe(
+          {
+            next:  (data:any) => {
+              //console.log('Dados obtidos:', data.message);
+              this.util.exibirSucesso(data.message);
+              
+             },
+            error:  (erro) => {
+              console.error(erro.error.message)
+              this.util.exibirErro(erro.error.message);
+            }
           }
-        }
-      );
-    }else{
-      console.log('Formulário inválido');
+        );
+      }else{
+        this.util.exibirErro("Formulário incompleto");
+      }
+    } else {
+      this.formGroup.markAllAsTouched(); // Marca todos os campos como "touched" para exibir os erros
     }
+
+  }
+
+  // Função para facilitar a exibição de mensagens de erro
+  hasError(field: string, errorType: string) {
+    return this.formGroup.get(field)?.hasError(errorType) && this.formGroup.get(field)?.touched;
   }
 
   public showHideEmpresa() {
     this.maisEmpresa = !this.maisEmpresa;
     this.descricaoServico  = null
+  }
+
+  public sanitize(str:string) {
+    return this.util.sanitize(str);
   }
 
  

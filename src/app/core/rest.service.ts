@@ -13,7 +13,6 @@ export class RestService {
   constructor(private httpClient: HttpClient) { }
 
   post(pUrl: string, pEndpoint: string, pData: any = {}) {
-    this.validarAmbiente(pUrl);
     
     let headers = new HttpHeaders().set("Content-Type", "application/json");
 
@@ -21,9 +20,7 @@ export class RestService {
 
   }
 
-  postBlob(pUrl: string, pEndpoint: string, pData: any) {
-    this.validarAmbiente(pUrl);
-    
+  postBlob(pUrl: string, pEndpoint: string, pData: any) {  
 
     let headers: HttpHeaders = new HttpHeaders().set("Content-type", "application/json");
 
@@ -31,9 +28,7 @@ export class RestService {
 
   }
 
-  getBlob(pUrl: string, pEndpoint: string) {
-    this.validarAmbiente(pUrl);
-    
+  getBlob(pUrl: string, pEndpoint: string) {   
 
     let headers: HttpHeaders = new HttpHeaders().set("Content-type", "application/json");
 
@@ -42,11 +37,7 @@ export class RestService {
   }
 
 
-  get(pUrl: string, pEndpoint: string, pHeaders?: { [header: string]: string }) {
-    
-    
-    this.validarAmbiente(pUrl);
-    
+  get(pUrl: string, pEndpoint: string, pHeaders?: { [header: string]: string }) {  
     return this.httpClient.get(pUrl + pEndpoint,pHeaders);
   }
 

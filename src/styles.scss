@@ -69,10 +69,10 @@ body pre {
     margin-bottom: 13px;
 }
 
-.site-wrapper img {
+.site-wrapper img.logo-topo {
     max-width: 100%;
     max-height: 100%;
-    width: auto;
+    width: 30%;
     height: auto;
 }
 
@@ -472,7 +472,7 @@ body .sm-clean li.current_page_item > a {
 ====================================== */
 
 #home {
-    background: $color-primary;
+    background: url('/assets/images/bg_topo.jpg') no-repeat $color-primary;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -494,10 +494,11 @@ body .sm-clean li.current_page_item > a {
 ====================================== */
 
 #a-empresa {
-    background-color: $color-primary;
+    background-color: $color-secondary;
+    color: $color-dark-grey;
 
     a{
-        color: $color-secondary;
+        color: $color-dark-grey;
     }
 }
 
@@ -555,8 +556,9 @@ body .sm-clean li.current_page_item > a {
     font-weight: normal;
 }
 
+
 #solucoes{
-    background: url(assets/images/ciberian/bg_infinito.png) no-repeat top center $color-dark-grey-2;
+    background: url(assets/images/bg_solucoes.jpg) no-repeat top center $color-dark-grey-2;
     background-size: 200%;
     .descricaoSolucao{
         height: 100px;

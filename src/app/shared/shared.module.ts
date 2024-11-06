@@ -8,6 +8,7 @@ import { SafeHtmlPipe } from './pipes/safeHtml/safeHtml.pipe';
 import { AguardeDialog } from './dialogs/aguarde/aguarde.dialog';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ConfirmacaoDialog } from './dialogs/confirmacao/confirmacao.dialog';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 @NgModule({
@@ -24,14 +25,16 @@ import { ConfirmacaoDialog } from './dialogs/confirmacao/confirmacao.dialog';
     declarations: [        
         SafeHtmlPipe,
         AguardeDialog,
-        ConfirmacaoDialog
+        ConfirmacaoDialog,
+        CarouselComponent
 
     ],
     exports: [
         CommonModule,
         MaterialModule,
         RouterModule,       
-        SafeHtmlPipe 
+        SafeHtmlPipe,
+        CarouselComponent
     ],
     providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}     

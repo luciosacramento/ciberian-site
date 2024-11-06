@@ -14,6 +14,9 @@ import {
 import { AppComponentService } from 'src/app/app.component.service';
 import { DataService } from 'src/app/core/data.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselComponent } from 'src/app/shared/carousel/carousel.component';
+
+
 
 @Component({
   selector: 'app-home',
@@ -72,6 +75,7 @@ export class HomePage implements OnInit {
         items: 1
       }
     }
+
   };
 
   constructor(private homeService: HomeService,protected util:Utils, 

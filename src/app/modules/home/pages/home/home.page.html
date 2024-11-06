@@ -6,18 +6,12 @@
 
             <!-- Home -->    
             <div id="home" class="section full-screen full-width">
-                <div class="section-wrapper block content-1170 ">
-                    <div class="content-wrapper">
+                <div class="block content-1170 my-auto ">
+                    <div class="">
                         <img src="/assets/images/hello.png" alt="" class="logo-topo block" >
-                        <!--h1 class="big-text center">
-                            We Craft Awesome Web And 
-                            <br> 
-                            Graphic Design Solutions
-                        </h1-->
                     </div>
                 </div>
             </div>
-
             <!-- A empresa --> 
             <div id="{{pageData[0].slug}}" class="section page-split">
                 <div class="section-wrapper block content-1170 center-relative">
@@ -40,10 +34,28 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div [@openClose]="maisEmpresa ? 'closed' : 'open'" class="section-content-holder float-right text-justify lh-lg" [innerHTML]="pageData[0].conteudo" ></div>
 
-                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" *ngIf="solucoesList" class="section-content-holder float-right">
+                    
+                    <div [@openClose]="maisEmpresa ? 'closed' : 'open'" class="section-content-holder float-right text-justify lh-lg" >
+                        <p [innerHTML]="pageData[0].conteudo"></p>
+
+                        <div  *ngIf="solucoesList">
+                            <div *ngFor="let item of documentosList; index as i;"  class="d-inline-grid">
+                                <div *ngIf="i < 3" class="d-flex align-items-start mx-3 mt-3" >
+                                    <div class="service-img"> 
+                                        <img src="{{item.image_url}}" alt="">
+                                    </div>
+                                    <div class="service-txt">
+                                        <h4 class="text-nowrap"><a [href]="item.documento" target="_blank">{{item.title}}</a></h4> 
+                                    </div>
+                                </div>
+                            </div>                                                        
+                        </div>
+
+                    </div>
+                    
+
+                    <div [@openClose]="maisEmpresa ? 'open' : 'closed'" *ngIf="solucoesList" class="section-content-holder float-right" >
                         <div class="content-wrapper">
                             
                             <div *ngFor="let item of documentosList; index as i;"  class="one_half animate" [ngClass]="{'last': i%2==0 }">
@@ -258,12 +270,15 @@
 
                             <p>&nbsp;</p>
 
-                            <div class="one_half" [innerHTML]="configData.endereco"></div>
-
-                            <div class="one_half last"> 
-                                Telefone: {{configData.telefone}} <br> 
-                                E-mail: {{configData.email}} <br> 
+                            <div *ngIf="configData">
+                                <div class="d-inline-grid mx-3 w-25" *ngFor="let item of configData; index as i;">
+                                    <p  [innerHTML]="item.address"></p>
+                                    {{item.phone}}<br> 
+                                    {{item.email}}
+                                </div>                   
+                                                          
                             </div>
+
                             <div class="clear"></div>                                   
                         </div>                                
                     </div>

@@ -12,6 +12,9 @@
                     </div>
                 </div>
             </div>
+
+            
+
             <!-- A empresa --> 
             <div id="{{pageData[0].slug}}" class="section page-split">
                 <div class="section-wrapper block content-1170 center-relative">
@@ -272,6 +275,7 @@
 
                             <div *ngIf="configData">
                                 <div class="d-inline-grid mx-3 w-25" *ngFor="let item of configData; index as i;">
+                                    <h4 class="p-0">{{item.titulo}}</h4>
                                     <p  [innerHTML]="item.address"></p>
                                     {{item.phone}}<br> 
                                     {{item.email}}

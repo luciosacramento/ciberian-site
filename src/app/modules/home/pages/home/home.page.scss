@@ -15,3 +15,18 @@
     color: #fff;
 }
 
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Retângulo preto transparente */
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.overlay h5, .overlay p {
+  margin: 0;
+}
+

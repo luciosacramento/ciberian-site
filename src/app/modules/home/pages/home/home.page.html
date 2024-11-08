@@ -172,9 +172,24 @@
                             <div id="team-holder">
                                 <div class="team-load-content-holder"></div>
 
-                                <div class="text-justify" id="descricaoColaborador"  [innerHTML]="descricaoColaborador"></div>
+                                <!--div class="text-justify" id="descricaoColaborador"  [innerHTML]="descricaoColaborador"></div-->
+
+                                <div id="carouselExampleControls" class="carousel slide" >
+                                    <div class="carousel-inner">
+                                      <div *ngFor="let image of colaboradoresList; let i = index" class="carousel-item" [class.active]="i === 0">
+                                        <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
+                                        
+                                        <!-- Título e descrição sobre a imagem -->
+                                        <div class="carousel-caption d-md-block">
+                                          <div class="overlay">
+                                            <h5>{{ image.title }}</h5>
+                                            <p>{{ image.description }}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                 
-                                <ul class="member-holder-wrapper">
+                                <!--ul class="member-holder-wrapper">
 
                                     <li *ngFor="let item of colaboradoresList; index as i;"  id="team-member-1" class="member-holder one_half">
                                         <a class="img-link ajax-member-content" (mouseover)="showDescricaoColaborador(i)"  data-id="1">
@@ -189,7 +204,7 @@
                                     </li>
 
                                     
-                                </ul>
+                                </ul-->
                                 <div class="clear"></div>                                        
                             </div>                                    
                         </div>                                

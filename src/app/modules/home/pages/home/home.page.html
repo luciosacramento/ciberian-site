@@ -124,7 +124,7 @@
                                       <ng-template carouselSlide>
                                         <div class="slide-{{h}}">
                                           <div *ngFor="let item of slide; index as i;"  class="one_half animate" [ngClass]="{'last': i%2==0 }">
-                                            <div class="d-flex align-items-start" >
+                                            <div class="d-flex align-items-start" [ngClass]="{'selecionado-solucoes': selectedIndex === i}">
                                                 <div class="service-img"> 
                                                     <img src="{{item.image_url}}" alt="">
                                                 </div>
@@ -151,8 +151,8 @@
             </div>
         </div>
 
-             <!-- Team -->
-             <div id="{{pageData[2].slug}}" class="section page-split" *ngIf="colaboradoresList">
+            <!-- Team -->
+            <div id="{{pageData[2].slug}}" class="section page-split" *ngIf="colaboradoresList">
                 <div class="section-wrapper block content-1170 center-relative">
                     <div class="bg-holder float-left">
                         <div class="split-color"></div>                                
@@ -174,9 +174,7 @@
                         <div class="content-wrapper">
                             <div id="team-holder">
                                 <div class="team-load-content-holder"></div>
-
-                                <!--div class="text-justify" id="descricaoColaborador"  [innerHTML]="descricaoColaborador"></div-->
-
+                               
                                 <div id="carouselExampleControls" class="carousel slide" >
                                     <div class="carousel-inner">
                                       <div *ngFor="let image of colaboradoresList; let i = index" class="carousel-item" [class.active]="i === 0">
@@ -185,29 +183,24 @@
                                         <!-- Título e descrição sobre a imagem -->
                                         <div class="carousel-caption d-md-block">
                                           <div class="overlay">
-                                            <h5>{{ image.title }}</h5>
-                                            <p>{{ image.description }}</p>
+                                            <h4 class="p-0 m-2">{{ image.title }}</h4>
+                                            <p [innerHTML]="image.description"></p>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                
-                                <!--ul class="member-holder-wrapper">
-
-                                    <li *ngFor="let item of colaboradoresList; index as i;"  id="team-member-1" class="member-holder one_half">
-                                        <a class="img-link ajax-member-content" (mouseover)="showDescricaoColaborador(i)"  data-id="1">
-                                            <img class="attachment-post-thumbnail" src="{{item.image_url}}" alt="">
-                                            <div class="member-mask">
-                                                <div class="member-info-holder">
-                                                    <p class="member-name">{{item.title}}</p>
-                                                    <p *ngIf="item.cargo" class="member-position">CEO</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
+                                                                   
                                     
-                                </ul-->
+                                    <!-- Controles do Carousel -->
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                    </div>  
                                 <div class="clear"></div>                                        
                             </div>                                    
                         </div>                                
@@ -216,16 +209,67 @@
                 </div>                        
             </div>
 
-            <!-- Contact -->
-            <div id="{{pageData[3].slug}}" class="section page-split">
+
+            <!-- Parceirias -->
+
+            <!-- Inspire -->
+            <div id="{{pageData[3].slug}}"  class="section full-screen full-width">
+                <div class="section-wrapper block content-1170 center-relative">
+                    <div class="content-wrapper">
+
+                        <h2 class="entry-title"> 
+                            {{pageData[3].titulo}}
+                        </h2>
+                        <p class="page-desc" [innerHTML]="sanitize(pageData[3].resumo)">
+                        </p>
+
+                        <div class="section-content-holder m-auto">
+                            <div class="content-wrapper">
+                                <div id="team-holder">
+                                    <div class="team-load-content-holder"></div>
+                                   
+                                    <div id="carouselParceiros" class="carousel slide m-auto">
+                                        <div class="carousel-inner">
+                                            <!-- Adiciona o layout para três imagens por slide -->
+                                            <div *ngFor="let slide of parceirosSlides; let i = index" class="carousel-item" [class.active]="i === 0">
+                                                <div class="row">
+                                                    <div class="col-4" *ngFor="let image of slide">
+                                                        <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <!-- Controles do Carousel -->
+                                        <button class="carousel-control-prev end-2" type="button" data-bs-target="#carouselParceiros" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselParceiros" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="clear"></div>                                        
+                                </div>                                    
+                            </div>                                
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+            <!--div id="{{pageData[3].slug}}" class="section page-split" *ngIf="parceirosSlides">
                 <div class="section-wrapper block content-1170 center-relative">
                     <div class="bg-holder float-left">
-                        <div class="split-color"></div>                               
+                        <div class="split-color"></div>                                
                     </div>
                     <div class="sticky-spacer">
                         <div class="section-title-holder float-left">
                             <div class="section-top-image"> 
-                                <img src="/assets/images/04_left.png" alt="">
+                                <img src="/assets/images/03_left.png" alt="">
                             </div>
                             <h2 class="entry-title"> 
                                 {{pageData[3].titulo}}
@@ -236,8 +280,63 @@
                     </div>
 
                     <div class="section-content-holder float-right">
+                        <div class="content-wrapper">
+                            <div id="team-holder">
+                                <div class="team-load-content-holder"></div>
+                               
+                                <div id="carouselParceiros" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <!-- Adiciona o layout para três imagens por slide --
+                                        <div *ngFor="let slide of parceirosSlides; let i = index" class="carousel-item" [class.active]="i === 0">
+                                            <div class="row">
+                                                <div class="col-4" *ngFor="let image of slide">
+                                                    <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                    <!-- Controles do Carousel --
+                                    <button class="carousel-control-prev end-2" type="button" data-bs-target="#carouselParceiros" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselParceiros" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="clear"></div>                                        
+                            </div>                                    
+                        </div>                                
+                    </div>
+                    <div class="clear"></div>                           
+                </div>                        
+            </div>
+
+            <!-- Contact -->
+            <div id="{{pageData[4].slug}}" class="section page-split">
+                <div class="section-wrapper block content-1170 center-relative">
+                    <div class="bg-holder float-left">
+                        <div class="split-color"></div>                               
+                    </div>
+                    <div class="sticky-spacer">
+                        <div class="section-title-holder float-left">
+                            <div class="section-top-image"> 
+                                <img src="/assets/images/04_left.png" alt="">
+                            </div>
+                            <h2 class="entry-title"> 
+                                {{pageData[4].titulo}}
+                            </h2>
+                            <p class="page-desc" [innerHTML]="sanitize(pageData[4].resumo)">
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-content-holder float-right">
                         <div class="content-wrapper">-
-                            <div class="info-text" [innerHTML]="pageData[3].conteudo" ></div>
+                            <div class="info-text" [innerHTML]="pageData[4].conteudo" ></div>
 
                             <p>&nbsp;</p>
 

@@ -25,4 +25,9 @@ export class HomeService {
     return this.server.get(environment.API_url,`colaboradores`);
   }
 
+  public getParceiros(){
+    return this.server.get(environment.API_url,`parceiros`);
+  }
+
+
 }

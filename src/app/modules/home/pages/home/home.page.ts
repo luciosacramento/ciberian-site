@@ -55,8 +55,11 @@ export class HomePage implements OnInit {
   public documentosList: any | null = null;
   public descricaoServico: string | null = null;
   public colaboradoresList: any | null = null;
+  public parceirosList:any | null = [];
+  public parceirosSlides:any | null = [];
   public descricaoColaborador: string | null = null;
   public descricaoSolucao: string | null = null;
+  public selectedIndex: number | null = null;
 
   public customOptions: OwlOptions = {
     loop: true,
@@ -94,7 +97,8 @@ export class HomePage implements OnInit {
     this.getConfig();
     this.getSolucoes();
     this.getDocumentos();
-    this.getColaboradores()
+    this.getColaboradores();
+    this.getParceiros();
   
 
     this.formGroup = this.fb.group({
@@ -125,9 +129,9 @@ export class HomePage implements OnInit {
     this.homeService.getSolucoes().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos solucoesList:', data);
+          //console.log('Dados obtidos solucoesList:', data);
           this.solucoesList = this.splitIntoChunks(data, 6);
-          console.log('this.solucoesList:', this.solucoesList);
+         // console.log('this.solucoesList:', this.solucoesList);
         },
         error:  (erro) => {
           console.error(erro)
@@ -151,7 +155,7 @@ export class HomePage implements OnInit {
     this.homeService.getDocumentos().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos Documentos:', data);
+         // console.log('Dados obtidos Documentos:', data);
           this.documentosList = data;
         },
         error:  (erro) => {
@@ -166,8 +170,41 @@ export class HomePage implements OnInit {
     this.homeService.getColaboradores().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos colaboradores:', data);
+         // console.log('Dados obtidos colaboradores:', data);
           this.colaboradoresList = data;
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
+  }
+
+  //get Parceiros
+  public getParceiros() {
+    this.homeService.getParceiros().subscribe(
+      {
+        next:  (data:any) => {
+          console.log('Dados obtidos Parceiros:', data);
+          this.parceirosList = data;
+
+          const chunkSize = 3;
+          for (let i = 0; i < this.parceirosList.length; i += chunkSize) {
+
+            let chunkSizeLast:number = i + chunkSize;
+            // console.log(this.parceirosList.slice(i, chunkSizeLast));
+            
+            if(i + chunkSize > this.parceirosList.length){
+              chunkSizeLast = this.parceirosList.length;
+            }
+            console.log(i,chunkSizeLast);
+
+              this.parceirosSlides.push(this.parceirosList.slice(i, chunkSizeLast));
+
+          }
+
+          console.log('parceirosSlides:', this.parceirosSlides);
+
         },
         error:  (erro) => {
           console.error(erro)
@@ -188,6 +225,7 @@ export class HomePage implements OnInit {
     console.log('id:', id);
     console.log('this.solucoesList[id]:', this.solucoesList[id]);
     this.descricaoSolucao = this.solucoesList[idPai][id].description;
+    this.selectedIndex = id;
   }
 
   public sendMail() {

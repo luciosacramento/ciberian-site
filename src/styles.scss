@@ -506,7 +506,7 @@ body .sm-clean li.current_page_item > a {
     background-color: $color-dourado;
 }
 
-#contato .split-color {
+#parcerias .split-color, #parcerias  {
     background-color: $color-dourado;
 }
 
@@ -522,6 +522,10 @@ body .sm-clean li.current_page_item > a {
 
 #nosso-time .split-color {
     background-color: $color-cinza-medio;
+}
+
+#parceiros .split-color {
+    background-color: $color-dourado;
 }
 
 .service-holder {
@@ -559,7 +563,7 @@ body .sm-clean li.current_page_item > a {
 
 #solucoes{
     background: url(assets/images/bg_solucoes.jpg) no-repeat top center $color-dark-grey-2;
-    background-size: 200%;
+    background-size: cover;
     .descricaoSolucao{
         height: 100px;
     }
@@ -2018,4 +2022,23 @@ footer ul {
     font-size: 11px;
     position: absolute;
     margin-top: -30px;
+}
+
+#carouselParceiros{
+
+    .carousel-control-prev{
+        left: -55px;
+    }
+
+    .carousel-control-next{
+        right: -55px;
+    }
+
+}
+
+.selecionado-solucoes{
+    background: rgba(191, 191, 191, 0.50);
+    div h4{
+        color: $color-dark-grey-2;
+    }
 }

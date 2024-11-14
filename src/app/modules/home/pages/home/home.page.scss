@@ -15,8 +15,12 @@
     color: #fff;
 }
 
+.carousel{
+  width: 80%;
+}
+
 .carousel-caption {
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;
@@ -24,6 +28,7 @@
   color: white;
   padding: 10px;
   text-align: center;
+  margin: auto;
 }
 
 .overlay h5, .overlay p {

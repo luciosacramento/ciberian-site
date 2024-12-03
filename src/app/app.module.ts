@@ -18,8 +18,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { InternaModule } from './modules/interna/interna.module';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { RecaptchaModule, RecaptchaFormsModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from 'src/environment/environment';
 
 registerLocaleData(localePt);

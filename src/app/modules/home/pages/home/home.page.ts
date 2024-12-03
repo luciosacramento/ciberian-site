@@ -16,7 +16,9 @@ import { AppComponentService } from 'src/app/app.component.service';
 import { DataService } from 'src/app/core/data.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 
 
@@ -117,28 +119,10 @@ export class HomePage implements OnInit {
      // recaptcha: [null, Validators.required]
     });
 
-    this.route.fragment.subscribe((fragment) => {
-      this.scrollToFragment(fragment);
-    });
-
+    
   }
 
-  ngAfterViewInit() {
-    // Após carregar o componente, verifique se há um fragmento na URL
-    const fragment = this.route.snapshot.fragment;
-    if (fragment) {
-      this.scrollToFragment(fragment);
-    }
-  }
-
-  scrollToFragment(fragment: string | null) {
-    if (fragment) {
-      const element = document.getElementById(fragment);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-  }
+  
 
   private getPage() {
     this.dataService.currentDataArray.subscribe(data => {

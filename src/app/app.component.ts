@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AppComponentService } from './app.component.service';
 import { Component } from '@angular/core';
 import { DataService } from './core/data.service';
+import { NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -23,26 +25,48 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.scrollToFragment();
+    });
     
     this.getConfig();
   }
+
+  private scrollToFragment() {
+    console.log("scrollToFragment");
+    const fragment = this.router.url.split('#')[1];
+
+    if (fragment) {
+      const element = document.getElementById(fragment);
+      if (element) {
+        // Pega a posição do elemento em relação ao viewport
+      const rect = element.getBoundingClientRect();
+      // Usa a posição absoluta do elemento em relação ao documento
+      window.scrollTo({
+        top: rect.top + window.pageYOffset, // adicione o deslocamento atual da página
+        behavior: 'smooth' // animação suave ao rolar
+      });
+      }
+    }
+  }
+
 
   public actualPage():string{
     const currentUrl = this.router.url; // Obtém a URL atual
     const segments = currentUrl.split('/'); // Divide a URL em segmentos
     const pageName = segments[1]; // Obtém o último segmento, que é o nome da página
-    console.log('Nome da página atual:', pageName);
     return pageName;
   }
 
   private getConfig() {
 
-    console.log('getConfig:');
   
     this.appService.getConfig().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos:', data);
           this.configData = data; 
           this.dataService.addItem(this.configData);
           this.getPages();

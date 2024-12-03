@@ -4,15 +4,13 @@ import { HomePage } from './pages/home/home.page';
 
 const routes: Routes = [
   {
-    path:"",
+    path: "",
     component: HomePage,
   }
-
 ];
-
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

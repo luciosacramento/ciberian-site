@@ -2,7 +2,6 @@
 import { Router } from '@angular/router';
 import { AppComponentService } from './app.component.service';
 import { Component } from '@angular/core';
-import { HomeService } from './modules/home/home.service';
 import { DataService } from './core/data.service';
 
 @Component({
@@ -19,7 +18,7 @@ export class AppComponent {
 
   constructor(private router: Router,
     private appService: AppComponentService, 
-    private dataService: DataService) {
+    private dataService: DataService,) {
     
   }
 

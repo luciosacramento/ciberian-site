@@ -19,6 +19,8 @@ import {MatListModule} from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { InternaModule } from './modules/interna/interna.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { RecaptchaModule, RecaptchaFormsModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { environment } from 'src/environment/environment';
 
 registerLocaleData(localePt);
 
@@ -45,8 +47,13 @@ registerLocaleData(localePt);
     HomeModule,
     InternaModule,
     HttpClientModule,
+    RecaptchaV3Module,
   ],
   providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.chaveCaptcha,
+    },
     {provide: LOCALE_ID, useValue: 'pt' },
     {
       provide: DEFAULT_CURRENCY_CODE,

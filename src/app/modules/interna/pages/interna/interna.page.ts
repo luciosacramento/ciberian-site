@@ -4,6 +4,8 @@ import { Utils } from 'src/app/core/utils';
 import { InternaService } from '../../interna.service';
 import { DataService } from 'src/app/core/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { HomeService } from 'src/app/modules/home/home.service';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-interna',
@@ -16,7 +18,8 @@ export class InternaPage implements OnInit {
   public denunciaForm: FormGroup | null = null;
 
   constructor(private route:ActivatedRoute, private internaService: InternaService,
-              protected util:Utils, private dataService: DataService,private fb: FormBuilder) {}
+              protected util:Utils, private dataService: DataService,private fb: FormBuilder,
+              private homeService:HomeService, private recaptchaV3Service: ReCaptchaV3Service) {}
 
   ngOnInit(): void {
 
@@ -28,7 +31,7 @@ export class InternaPage implements OnInit {
     this.denunciaForm = this.fb.group({
       nome: [''],  // Não obrigatório
       sobrenome: [''],  // Não obrigatório
-      email: ['', [Validators.email]],  // Não obrigatório, mas com validação de email
+      email: ['', [Validators.required,Validators.email]],  // Não obrigatório, mas com validação de email
       comentario: ['', [Validators.required]]  // Obrigatório
     });
   }
@@ -43,6 +46,43 @@ export class InternaPage implements OnInit {
     });
   }
 
+  public verifyEnviarDenuncia() {
+
+    this.recaptchaV3Service.execute('importantAction')
+    .subscribe({
+      
+      next:  (data:any) => {
+        console.log('Dados obtidos:', data);
+        this.verifyReCaptcha(data);
+        //this.util.exibirSucesso(data.message);
+        
+       },
+      error:  (erro) => {
+        console.error(erro.error.message)
+        this.util.exibirErro(erro.error.message);
+      }
+
+    });
+
+   }
+
+
+  
+  public verifyReCaptcha(responseToken:string) {
+
+    this.homeService.verifyReCaptcha(responseToken).subscribe(
+      {
+        next:  (data:any) => {
+          if(data.success){
+            this.enviarDenuncia();
+          }
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
+  }
 
   enviarDenuncia() {
     if (this.denunciaForm && this.denunciaForm.valid) {
@@ -50,19 +90,23 @@ export class InternaPage implements OnInit {
           {
             next:  (data:any) => {
               //console.log('Dados obtidos:', data.message);
+             // this.verifyReCaptcha(data);
               this.util.exibirSucesso(data.message);
               
             },
             error:  (erro) => {
-              console.error(erro)
+              this.denunciaForm?.markAllAsTouched();
+              this.util.exibirErro(erro.error.message);
             }
           }
         );
       // Aqui você pode fazer o envio do formulário
     } else {
-      console.log('Formulário inválido');
+      this.denunciaForm?.markAllAsTouched();
+      this.util.exibirErro('Formulário inválido');
     }
   }
+
 
   public sanitize(str:string) {
     return this.util.sanitize(str);

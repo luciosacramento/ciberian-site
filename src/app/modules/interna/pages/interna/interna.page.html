@@ -12,7 +12,7 @@
                 <p class="text-center">OS DADOS PESSOAIS são OPCIONAIS</p>
 
                 <div class="denuncia-form">
-                    <form *ngIf="denunciaForm" [formGroup]="denunciaForm" (ngSubmit)="enviarDenuncia()">
+                    <form *ngIf="denunciaForm" [formGroup]="denunciaForm" (ngSubmit)="verifyEnviarDenuncia()">
 
                         <div class="contact-form">
                             <div>

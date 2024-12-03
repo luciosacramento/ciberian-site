@@ -1,3 +1,4 @@
+import { environment } from 'src/environment/environment';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
@@ -14,7 +15,7 @@ import {
 import { AppComponentService } from 'src/app/app.component.service';
 import { DataService } from 'src/app/core/data.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CarouselComponent } from 'src/app/shared/carousel/carousel.component';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 
 
@@ -60,6 +61,9 @@ export class HomePage implements OnInit {
   public descricaoColaborador: string | null = null;
   public descricaoSolucao: string | null = null;
   public selectedIndex: number | null = null;
+  public chaveCaptcha:string = environment.chaveCaptcha;
+  public captchaResolved = false;
+  
 
   public customOptions: OwlOptions = {
     loop: true,
@@ -83,7 +87,8 @@ export class HomePage implements OnInit {
 
   constructor(private homeService: HomeService,protected util:Utils, 
               private appService:AppComponentService, private dataService: DataService,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private recaptchaV3Service: ReCaptchaV3Service) {}
 
   ngOnInit(): void {
 
@@ -106,7 +111,8 @@ export class HomePage implements OnInit {
       remetente: ['', [Validators.required, Validators.email]],
       assunto: ['', [Validators.required]],
       telefone: ['', [Validators.required, Validators.pattern(/^\d+$/)]], // Exemplo de regex para números
-      mensagem: ['', [Validators.required, Validators.minLength(10)]]
+      mensagem: ['', [Validators.required, Validators.minLength(10)]],
+     // recaptcha: [null, Validators.required]
     });
   }
 
@@ -228,8 +234,44 @@ export class HomePage implements OnInit {
     this.selectedIndex = id;
   }
 
-  public sendMail() {
 
+  public VerifySendMail() {
+
+    this.recaptchaV3Service.execute('importantAction')
+    .subscribe({
+      
+      next:  (data:any) => {
+        //console.log('Dados obtidos:', data);
+        this.verifyReCaptcha(data);
+        //this.util.exibirSucesso(data.message);
+        
+       },
+      error:  (erro) => {
+        console.error(erro.error.message)
+        this.util.exibirErro(erro.error.message);
+      }
+
+    });
+
+   }
+
+  public verifyReCaptcha(responseToken:string) {
+
+    this.homeService.verifyReCaptcha(responseToken).subscribe(
+      {
+        next:  (data:any) => {
+          if(data.success){
+            this.sendMail();
+          }
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
+  }
+
+  private sendMail(){
     if (this.formGroup.valid) {
       // Lógica para enviar o email
       if(this.formGroup.valid){
@@ -241,18 +283,18 @@ export class HomePage implements OnInit {
               
              },
             error:  (erro) => {
-              console.error(erro.error.message)
+              this.formGroup.markAllAsTouched();
               this.util.exibirErro(erro.error.message);
             }
           }
         );
       }else{
+        this.formGroup.markAllAsTouched();
         this.util.exibirErro("Formulário incompleto");
       }
     } else {
       this.formGroup.markAllAsTouched(); // Marca todos os campos como "touched" para exibir os erros
     }
-
   }
 
   // Função para facilitar a exibição de mensagens de erro

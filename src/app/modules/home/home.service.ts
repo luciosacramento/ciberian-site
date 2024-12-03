@@ -29,5 +29,9 @@ export class HomeService {
     return this.server.get(environment.API_url,`parceiros`);
   }
 
+  public verifyReCaptcha(TOKEN:string){
+    return this.server.post(environment.API_url,`verify-recaptcha`,{ token: TOKEN });
+  }
+
 
 }

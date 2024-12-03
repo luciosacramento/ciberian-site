@@ -340,7 +340,7 @@
 
                             <p>&nbsp;</p>
 
-                            <form [formGroup]="formGroup" (ngSubmit)="sendMail()" >
+                            <form [formGroup]="formGroup" (ngSubmit)="VerifySendMail()" >
 
                                 <div class="contact-form">
                                     <!-- Nome -->
@@ -376,7 +376,7 @@
                                         <small *ngIf="hasError('mensagem', 'required')">Mensagem é obrigatória.</small>
                                         <small *ngIf="hasError('mensagem', 'minlength')">Mensagem deve ter no mínimo 10 caracteres.</small>
                                     </p>
-                                
+
                                     <!-- Botão de Enviar -->
                                     <p class="contact-submit-holder">
                                         <input type="submit" value="ENVIAR">

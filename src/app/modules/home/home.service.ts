@@ -30,7 +30,7 @@ export class HomeService {
   }
 
   public verifyReCaptcha(TOKEN:string){
-    return this.server.post(environment.API_url,`verify-recaptcha`,{ token: TOKEN });
+    return this.server.post(environment.API_url,`verifyrecaptcha`,{ token: TOKEN });
   }
 
 

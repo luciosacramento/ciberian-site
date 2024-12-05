@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RestService } from 'src/app/core/rest.service';
 import { environment } from 'src/environment/environment';
@@ -7,7 +8,7 @@ import { environment } from 'src/environment/environment';
 })
 export class HomeService {
 
-  constructor(private server: RestService) {}
+  constructor(private server: RestService, private http: HttpClient) {}
 
   public sendMail(value:Array<any>){
     return this.server.post(environment.API_url,`enviar-email`,value);
@@ -32,6 +33,19 @@ export class HomeService {
   public verifyReCaptcha(TOKEN:string){
     return this.server.post(environment.API_url,`verifyrecaptcha`,{ token: TOKEN });
   }
+
+  verifyRecaptcha(token: string): void {
+    this.http.post(`${environment.API_url}verify-recaptcha`, { token })
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+  
 
 
 }

@@ -66,6 +66,7 @@ export class HomePage implements OnInit {
   public selectedIndex: number | null = null;
   public chaveCaptcha:string = environment.chaveCaptcha;
   public captchaResolved = false;
+  public token: string|undefined;
   
 
   public customOptions: OwlOptions = {
@@ -92,7 +93,8 @@ export class HomePage implements OnInit {
               private appService:AppComponentService, private dataService: DataService,
               private fb: FormBuilder,
               private recaptchaV3Service: ReCaptchaV3Service,
-              private route: ActivatedRoute, private router: Router) {}
+              private route: ActivatedRoute, private router: Router,
+            ) {this.token = undefined;}
 
   ngOnInit(): void {
 

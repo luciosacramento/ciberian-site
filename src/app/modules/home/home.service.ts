@@ -31,10 +31,12 @@ export class HomeService {
   }
 
 
-  verifyReCaptcha(TOKEN: string): any {
+  verifyReCaptcha(token : string): any {
 
     //Access-Control-Allow-Origin
-    return this.http.get(`/wp-json/custom/v1/verify-recaptcha?token=${TOKEN}`)
+   // return this.http.get(`/wp-json/custom/v1/verify-recaptcha?token=${TOKEN}`)
+   return this.http.post('/wp-json/custom/v1/verify-recaptcha', { token });
+
   }
   
 

@@ -30,20 +30,9 @@ export class HomeService {
     return this.server.get(environment.API_url,`parceiros`);
   }
 
-  public verifyReCaptcha(TOKEN:string){
-    return this.server.post(environment.API_url,`verifyrecaptcha`,{ token: TOKEN });
-  }
 
-  verifyRecaptcha(token: string): void {
-    this.http.post(`${environment.API_url}verify-recaptcha`, { token })
-      .subscribe({
-        next: (response: any) => {
-          console.log(response);
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
+  verifyReCaptcha(TOKEN: string): any {
+    return this.http.post(`${environment.API_url}verify-recaptcha`, { token: TOKEN })
   }
   
 

@@ -35,7 +35,10 @@ export class HomeService {
 
     //Access-Control-Allow-Origin
    // return this.http.get(`/wp-json/custom/v1/verify-recaptcha?token=${TOKEN}`)
-   return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/verifyrecaptcha.php', { token : TOKEN });
+      let formData = new FormData();      
+      formData.append('file', TOKEN);
+
+   return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/verifyrecaptcha.php', formData);
 
   }
   

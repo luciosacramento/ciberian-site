@@ -31,11 +31,11 @@ export class HomeService {
   }
 
 
-  verifyReCaptcha(token : string): any {
+  verifyReCaptcha(TOKEN : string): any {
 
     //Access-Control-Allow-Origin
    // return this.http.get(`/wp-json/custom/v1/verify-recaptcha?token=${TOKEN}`)
-   return this.http.post('/wp-json/custom/v1/verify-recaptcha', { token });
+   return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/verifyrecaptcha.php', { token : TOKEN });
 
   }
   

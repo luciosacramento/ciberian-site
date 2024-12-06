@@ -236,8 +236,6 @@ export class HomePage implements OnInit {
   }
   
   public showSolucaoDescricao(idPai:number, id: number) {
-    console.log('id:', id);
-    console.log('this.solucoesList[id]:', this.solucoesList[id]);
     this.descricaoSolucao = this.solucoesList[idPai][id].description;
     this.selectedIndex = id;
   }
@@ -279,32 +277,19 @@ export class HomePage implements OnInit {
     );
   }
 
-  convertFormGroupToFormData(formGroup: FormGroup | FormArray, formData = new FormData(), parentKey = ''): FormData {
-    Object.keys(formGroup.controls).forEach((key) => {
-      const control = formGroup.get(key);
-      const formKey = parentKey ? `${parentKey}.${key}` : key;
   
-      if (control instanceof FormControl) {
-        if (control.value instanceof File || control.value instanceof Blob) {
-          formData.append(formKey, control.value);
-        } else {
-          formData.append(formKey, control.value || '');
-        }
-      } else if (control instanceof FormGroup || control instanceof FormArray) {
-        this.convertFormGroupToFormData(control, formData, formKey);
-      }
-    });
-  
-    return formData;
-  }
   
   private sendMail(){
 
       // Lógica para enviar o email
       if(this.formGroup.valid){
 
-        let formData = new FormData();  
-        formData = this.convertFormGroupToFormData(this.formGroup,formData)
+        let formData = new FormData();      
+        formData.append('telefone', this.formGroup.get('telefone')?.value);
+        formData.append('assunto', this.formGroup.get('assunto')?.value);
+        formData.append('nome', this.formGroup.get('nome')?.value);
+        formData.append('mensagem', this.formGroup.get('mensagem')?.value);
+        formData.append('remetente', this.formGroup.get('remetente')?.value);
 
         this.homeService.sendMail(formData).subscribe(
           {

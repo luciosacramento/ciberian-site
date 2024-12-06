@@ -11,6 +11,7 @@ export class HomeService {
   constructor(private server: RestService, private http: HttpClient) {}
 
   public sendMail(value:FormData){
+    console.log("value",value);
     return this.server.post(environment.API_url,`enviar-email`,value);
   }
 

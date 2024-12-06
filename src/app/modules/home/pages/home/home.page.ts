@@ -2,7 +2,7 @@ import { environment } from 'src/environment/environment';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
-import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/core/utils';
 import {
   trigger,
@@ -279,11 +279,34 @@ export class HomePage implements OnInit {
     );
   }
 
+  convertFormGroupToFormData(formGroup: FormGroup | FormArray, formData = new FormData(), parentKey = ''): FormData {
+    Object.keys(formGroup.controls).forEach((key) => {
+      const control = formGroup.get(key);
+      const formKey = parentKey ? `${parentKey}.${key}` : key;
+  
+      if (control instanceof FormControl) {
+        if (control.value instanceof File || control.value instanceof Blob) {
+          formData.append(formKey, control.value);
+        } else {
+          formData.append(formKey, control.value || '');
+        }
+      } else if (control instanceof FormGroup || control instanceof FormArray) {
+        this.convertFormGroupToFormData(control, formData, formKey);
+      }
+    });
+  
+    return formData;
+  }
+  
   private sendMail(){
-    if (this.formGroup.valid) {
+
       // Lógica para enviar o email
       if(this.formGroup.valid){
-        this.homeService.sendMail(this.formGroup.value).subscribe(
+
+        let formData = new FormData();  
+        formData = this.convertFormGroupToFormData(this.formGroup,formData)
+
+        this.homeService.sendMail(formData).subscribe(
           {
             next:  (data:any) => {
               //console.log('Dados obtidos:', data.message);
@@ -300,9 +323,7 @@ export class HomePage implements OnInit {
         this.formGroup.markAllAsTouched();
         this.util.exibirErro("Formulário incompleto");
       }
-    } else {
-      this.formGroup.markAllAsTouched(); // Marca todos os campos como "touched" para exibir os erros
-    }
+
   }
 
   // Função para facilitar a exibição de mensagens de erro

@@ -10,7 +10,7 @@ export class HomeService {
 
   constructor(private server: RestService, private http: HttpClient) {}
 
-  public sendMail(value:Array<any>){
+  public sendMail(value:FormData){
     return this.server.post(environment.API_url,`enviar-email`,value);
   }
 

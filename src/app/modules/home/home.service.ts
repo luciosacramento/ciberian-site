@@ -38,7 +38,7 @@ export class HomeService {
       let formData = new FormData();      
       formData.append('token', TOKEN);
 
-   return this.http.post('/wp-content/themes/ciberian/php/verifyrecaptcha.php', formData);
+   return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/verifyrecaptcha.php', formData);
 
   }
   

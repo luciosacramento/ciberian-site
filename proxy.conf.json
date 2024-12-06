@@ -1,11 +1,11 @@
 {
-    "/wp-json": {
+    "/wp-content": {
       "target": "https://www2.ciberian.com.br", 
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",
       "pathRewrite": {
-        "^/wp-json": "" 
+        "^/wp-content": "" 
       }
     }
   }

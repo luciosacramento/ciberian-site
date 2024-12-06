@@ -36,7 +36,7 @@ export class HomeService {
     //Access-Control-Allow-Origin
    // return this.http.get(`/wp-json/custom/v1/verify-recaptcha?token=${TOKEN}`)
       let formData = new FormData();      
-      formData.append('file', TOKEN);
+      formData.append('token', TOKEN);
 
    return this.http.post('/wp-content/themes/ciberian/php/verifyrecaptcha.php', formData);
 

@@ -32,6 +32,8 @@ export class HomeService {
 
 
   verifyReCaptcha(TOKEN: string): any {
+
+    //Access-Control-Allow-Origin
     return this.http.post(`${environment.API_url}verify-recaptcha`, { token: TOKEN })
   }
   

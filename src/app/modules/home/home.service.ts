@@ -34,7 +34,7 @@ export class HomeService {
   verifyReCaptcha(TOKEN: string): any {
 
     //Access-Control-Allow-Origin
-    return this.server.post(environment.API_url,`verify-recaptcha?token=${TOKEN}`)
+    return this.server.post(`/wp-json/custom/v1/`,`verify-recaptcha?token=${TOKEN}`)
   }
   
 

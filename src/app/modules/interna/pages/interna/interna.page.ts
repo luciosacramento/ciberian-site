@@ -15,7 +15,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 export class InternaPage implements OnInit {
   public pageData: any = [];
   public slug: string | null = null;
-  public denunciaForm: FormGroup | null = null;
+  public formGroup:FormGroup = new FormGroup({});
 
   constructor(private route:ActivatedRoute, private internaService: InternaService,
               protected util:Utils, private dataService: DataService,private fb: FormBuilder,
@@ -28,7 +28,7 @@ export class InternaPage implements OnInit {
       this.getPage(cod);
     });
 
-    this.denunciaForm = this.fb.group({
+    this.formGroup = this.fb.group({
       nome: [''],  // Não obrigatório
       sobrenome: [''],  // Não obrigatório
       email: ['', [Validators.required,Validators.email]],  // Não obrigatório, mas com validação de email
@@ -46,13 +46,14 @@ export class InternaPage implements OnInit {
     });
   }
 
-  public verifyEnviarDenuncia() {
+  
+  public VerifySendMail() {
 
     this.recaptchaV3Service.execute('importantAction')
     .subscribe({
       
       next:  (data:any) => {
-        console.log('Dados obtidos:', data);
+        //console.log('Dados obtidos:', data);
         this.verifyReCaptcha(data);
         //this.util.exibirSucesso(data.message);
         
@@ -66,15 +67,13 @@ export class InternaPage implements OnInit {
 
    }
 
-
-  
   public verifyReCaptcha(responseToken:string) {
 
     this.homeService.verifyReCaptcha(responseToken).subscribe(
       {
         next:  (data:any) => {
           if(data.success){
-            this.enviarDenuncia();
+            this.sendMail();
           }
         },
         error:  (erro:any) => {
@@ -84,27 +83,44 @@ export class InternaPage implements OnInit {
     );
   }
 
-  enviarDenuncia() {
-    if (this.denunciaForm && this.denunciaForm.valid) {
-        this.internaService.sendDenuncia(this.denunciaForm.value).subscribe(
+  
+  
+  private sendMail(){
+
+      // Lógica para enviar o email
+      if(this.formGroup.valid){
+
+        this.formGroup = this.fb.group({
+          nome: [''],  // Não obrigatório
+          sobrenome: [''],  // Não obrigatório
+          email: ['', [Validators.required,Validators.email]],  // Não obrigatório, mas com validação de email
+          comentario: ['', [Validators.required]]  // Obrigatório
+        });
+
+        let formData = new FormData();      
+        formData.append('nome', this.formGroup.get('nome')?.value?this.formGroup.get('nome')?.value:"");
+        formData.append('sobrenome', this.formGroup.get('sobrenome')?.value?this.formGroup.get('sobrenome')?.value:"");
+        formData.append('email', this.formGroup.get('email')?.value);
+        formData.append('comentario', this.formGroup.get('comentario')?.value);
+
+        this.internaService.sendDenuncia(formData).subscribe(
           {
             next:  (data:any) => {
               //console.log('Dados obtidos:', data.message);
-             // this.verifyReCaptcha(data);
               this.util.exibirSucesso(data.message);
               
-            },
+             },
             error:  (erro) => {
-              this.denunciaForm?.markAllAsTouched();
+              this.formGroup.markAllAsTouched();
               this.util.exibirErro(erro.error.message);
             }
           }
         );
-      // Aqui você pode fazer o envio do formulário
-    } else {
-      this.denunciaForm?.markAllAsTouched();
-      this.util.exibirErro('Formulário inválido');
-    }
+      }else{
+        this.formGroup.markAllAsTouched();
+        this.util.exibirErro("Formulário incompleto");
+      }
+
   }
 
 

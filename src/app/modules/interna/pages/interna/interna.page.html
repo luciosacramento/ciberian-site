@@ -12,7 +12,7 @@
                 <p class="text-center">OS DADOS PESSOAIS são OPCIONAIS</p>
 
                 <div class="denuncia-form">
-                    <form *ngIf="denunciaForm" [formGroup]="denunciaForm" (ngSubmit)="verifyEnviarDenuncia()">
+                    <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="VerifySendMail()">
 
                         <div class="contact-form">
                             <div>
@@ -25,14 +25,14 @@
                           
                             <div>
                               <input id="email" type="email" formControlName="email" placeholder="E-mail"/>
-                              <div *ngIf="denunciaForm.get('email')?.invalid && denunciaForm.get('email')?.touched">
+                              <div *ngIf="formGroup.get('email')?.invalid && formGroup.get('email')?.touched">
                                 <small class="error">Por favor, insira um e-mail válido.</small>
                               </div>
                             </div>
                           
                             <div>
                               <textarea id="comentario" rows="4" formControlName="comentario" placeholder="Comentário ou Mensagem"></textarea>
-                              <div *ngIf="denunciaForm.get('comentario')?.invalid && denunciaForm.get('comentario')?.touched">
+                              <div *ngIf="formGroup.get('comentario')?.invalid && formGroup.get('comentario')?.touched">
                                 <small class="error">O comentário é obrigatório.</small>
                               </div>
                             </div>

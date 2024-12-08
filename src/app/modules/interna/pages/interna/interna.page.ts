@@ -90,13 +90,6 @@ export class InternaPage implements OnInit {
       // Lógica para enviar o email
       if(this.formGroup.valid){
 
-        this.formGroup = this.fb.group({
-          nome: [''],  // Não obrigatório
-          sobrenome: [''],  // Não obrigatório
-          email: ['', [Validators.required,Validators.email]],  // Não obrigatório, mas com validação de email
-          comentario: ['', [Validators.required]]  // Obrigatório
-        });
-
         let formData = new FormData();      
         formData.append('nome', this.formGroup.get('nome')?.value?this.formGroup.get('nome')?.value:"");
         formData.append('sobrenome', this.formGroup.get('sobrenome')?.value?this.formGroup.get('sobrenome')?.value:"");

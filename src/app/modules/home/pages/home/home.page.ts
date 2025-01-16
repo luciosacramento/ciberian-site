@@ -199,10 +199,10 @@ export class HomePage implements OnInit {
     this.homeService.getParceiros().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos Parceiros:', data);
+
           this.parceirosList = data;
 
-          const chunkSize = 4;
+          const chunkSize = 5;
           for (let i = 0; i < this.parceirosList.length; i += chunkSize) {
 
             let chunkSizeLast:number = i + chunkSize;
@@ -211,13 +211,10 @@ export class HomePage implements OnInit {
             if(i + chunkSize > this.parceirosList.length){
               chunkSizeLast = this.parceirosList.length;
             }
-            console.log(i,chunkSizeLast);
 
               this.parceirosSlides.push(this.parceirosList.slice(i, chunkSizeLast));
 
           }
-
-          console.log('parceirosSlides:', this.parceirosSlides);
 
         },
         error:  (erro) => {
@@ -225,6 +222,8 @@ export class HomePage implements OnInit {
         }
       }
     );
+
+    console.log("this.parceirosSlides",this.parceirosSlides);
   }
 
   public showDescricao(id: number) {

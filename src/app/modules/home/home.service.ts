@@ -12,9 +12,6 @@ export class HomeService {
 
   public sendMail(formData:FormData){
 
-    console.log('FormData:',formData.getAll("nome") );
-
-    
     //return this.server.post(environment.API_url,`enviar-email`,value);
     return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/enviar_email.php', formData);
   }

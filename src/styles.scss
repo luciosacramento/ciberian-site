@@ -2027,11 +2027,16 @@ footer ul {
 #carouselParceiros{
 
     .carousel-control-prev{
-        left: -55px;
+        left: -75px;
     }
 
     .carousel-control-next{
-        right: -55px;
+        right: -75px;
+    }
+
+    .carousel-item .row div{
+        align-self: center;
+        padding: 0 20px;
     }
 
 }

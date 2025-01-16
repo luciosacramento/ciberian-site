@@ -202,7 +202,7 @@ export class HomePage implements OnInit {
           console.log('Dados obtidos Parceiros:', data);
           this.parceirosList = data;
 
-          const chunkSize = 3;
+          const chunkSize = 4;
           for (let i = 0; i < this.parceirosList.length; i += chunkSize) {
 
             let chunkSizeLast:number = i + chunkSize;

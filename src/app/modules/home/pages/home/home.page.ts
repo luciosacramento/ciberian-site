@@ -295,6 +295,7 @@ export class HomePage implements OnInit {
             next:  (data:any) => {
               //console.log('Dados obtidos:', data.message);
               this.util.exibirSucesso(data.message);
+              this.formGroup.reset();
               
              },
             error:  (erro) => {

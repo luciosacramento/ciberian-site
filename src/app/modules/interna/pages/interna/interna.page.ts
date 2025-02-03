@@ -36,14 +36,21 @@ export class InternaPage implements OnInit {
     });
   }
 
-  private getPage(cod:number) {
+  private getPage(cod:string) {
     this.dataService.currentDataArray.subscribe(data => {
+
+      console.log(data);
       if(data[1]){
-        this.pageData =  data[1][cod];
+        this.pageData = this.buscarPorSlug(data[1],cod);
+        //this.pageData =  data[1][cod];
         this.slug = this.pageData.slug;
         console.log('pageData:', this.pageData);
       }
     });
+  }
+
+  private buscarPorSlug(data:Array<any>,slug:string) {
+    return data.find((pagina:any) => pagina.slug === slug);
   }
 
   public verifyEnviarDenuncia() {

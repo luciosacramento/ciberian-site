@@ -24,7 +24,7 @@
                       <li *ngFor="let item of pageList; index as i" >
                           <a *ngIf="item.pagina_interna == false;else other_content" [routerLink]="['/home']" [fragment]="item.slug">{{item.titulo }}</a>
                           <ng-template #other_content>
-                              <a  [routerLink]="['/interna/', i]" >{{item.titulo}}</a>
+                              <a  [routerLink]="['/interna/', item.slug]" >{{item.titulo}}</a>
                           </ng-template>
                       </li>                                                           
                   </ul>

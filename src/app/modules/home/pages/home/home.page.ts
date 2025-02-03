@@ -122,6 +122,24 @@ export class HomePage implements OnInit {
     
   }
 
+  private scrollToFragment() {
+    console.log("scrollToFragment");
+    const fragment = this.router.url.split('#')[1];
+
+    if (fragment) {
+      const element = document.getElementById(fragment);
+      if (element) {
+        // Pega a posição do elemento em relação ao viewport
+      const rect = element.getBoundingClientRect();
+      // Usa a posição absoluta do elemento em relação ao documento
+      window.scrollTo({
+        top: rect.top + window.pageYOffset, // adicione o deslocamento atual da página
+        behavior: 'smooth' // animação suave ao rolar
+      });
+      }
+    }
+  }
+
   
 
   private getPage() {
@@ -199,8 +217,9 @@ export class HomePage implements OnInit {
     this.homeService.getParceiros().subscribe(
       {
         next:  (data:any) => {
-          console.log('Dados obtidos Parceiros:', data);
+          //console.log('Dados obtidos Parceiros:', data);
           this.parceirosList = data;
+          this.scrollToFragment();
 
           const chunkSize = 3;
           for (let i = 0; i < this.parceirosList.length; i += chunkSize) {
@@ -211,13 +230,13 @@ export class HomePage implements OnInit {
             if(i + chunkSize > this.parceirosList.length){
               chunkSizeLast = this.parceirosList.length;
             }
-            console.log(i,chunkSizeLast);
+           // console.log(i,chunkSizeLast);
 
               this.parceirosSlides.push(this.parceirosList.slice(i, chunkSizeLast));
 
           }
 
-          console.log('parceirosSlides:', this.parceirosSlides);
+          //console.log('parceirosSlides:', this.parceirosSlides);
 
         },
         error:  (erro) => {
@@ -236,8 +255,8 @@ export class HomePage implements OnInit {
   }
   
   public showSolucaoDescricao(idPai:number, id: number) {
-    console.log('id:', id);
-    console.log('this.solucoesList[id]:', this.solucoesList[id]);
+   // console.log('id:', id);
+    //console.log('this.solucoesList[id]:', this.solucoesList[id]);
     this.descricaoSolucao = this.solucoesList[idPai][id].description;
     this.selectedIndex = id;
   }

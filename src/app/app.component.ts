@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { DataService } from './core/data.service';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { RotaService } from './shared/rota-service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
 
   constructor(private router: Router,
     private appService: AppComponentService, 
-    private dataService: DataService,) {
+    private dataService: DataService,
+    private rotaService: RotaService) {
     
   }
 
@@ -36,7 +38,7 @@ export class AppComponent {
   }
 
   private scrollToFragment() {
-    console.log("scrollToFragment");
+
     const fragment = this.router.url.split('#')[1];
 
     if (fragment) {

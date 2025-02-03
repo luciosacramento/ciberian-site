@@ -130,7 +130,6 @@
 
         splitSectionTitleFix();
 
-        $('.doc-loader').fadeOut(600);
     });
 
 

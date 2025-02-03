@@ -156,7 +156,9 @@ export class Utils {
 
         let dialogRef = this.dialog.open(AguardeDialog, {
             width: '250px', 
-            disableClose: true,restoreFocus:true,autoFocus:false,closeOnNavigation:true,hasBackdrop:true
+            disableClose: true,restoreFocus:true,autoFocus:false,
+            enterAnimationDuration: '1ms',
+            exitAnimationDuration: '300ms',
         }
         );
         return dialogRef;

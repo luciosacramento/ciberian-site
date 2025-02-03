@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RestService } from 'src/app/core/rest.service';
 import { environment } from 'src/environment/environment';
@@ -7,10 +8,12 @@ import { environment } from 'src/environment/environment';
 })
 export class HomeService {
 
-  constructor(private server: RestService) {}
+  constructor(private server: RestService, private http: HttpClient) {}
 
-  public sendMail(value:Array<any>){
-    return this.server.post(environment.API_url,`enviar-email`,value);
+  public sendMail(formData:FormData){
+
+    //return this.server.post(environment.API_url,`enviar-email`,value);
+    return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/enviar_email.php', formData);
   }
 
   public getSolucoes(){
@@ -29,9 +32,18 @@ export class HomeService {
     return this.server.get(environment.API_url,`parceiros`);
   }
 
-  public verifyReCaptcha(TOKEN:string){
-    return this.server.post(environment.API_url,`verify-recaptcha`,{ token: TOKEN });
+
+  verifyReCaptcha(TOKEN : string): any {
+
+    //Access-Control-Allow-Origin
+   // return this.http.get(`/wp-json/custom/v1/verify-recaptcha?token=${TOKEN}`)
+      let formData = new FormData();      
+      formData.append('token', TOKEN);
+
+   return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/verifyrecaptcha.php', formData);
+
   }
+  
 
 
 }

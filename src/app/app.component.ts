@@ -31,7 +31,10 @@ export class AppComponent {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      this.scrollToFragment();
+      setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
     });
     
     this.getConfig();

@@ -350,7 +350,7 @@ body .sm-clean li.current_page_item > a {
     font-size: 60px;
     line-height: 70px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     padding-bottom: 0;
     font-weight: 200;
     word-break: break-word;
@@ -423,7 +423,6 @@ body .sm-clean li.current_page_item > a {
 .section.page-split .section-title-holder .page-desc {
     text-align: left;
     margin-bottom: 40px;
-    margin-top: 60px;
 }
 
 .full-width {
@@ -2028,11 +2027,16 @@ footer ul {
 #carouselParceiros{
 
     .carousel-control-prev{
-        left: -55px;
+        left: -75px;
     }
 
     .carousel-control-next{
-        right: -55px;
+        right: -75px;
+    }
+
+    .carousel-item .row div{
+        align-self: center;
+        padding: 0 20px;
     }
 
 }

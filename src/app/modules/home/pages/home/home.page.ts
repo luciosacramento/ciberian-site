@@ -2,7 +2,7 @@ import { environment } from 'src/environment/environment';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
-import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/core/utils';
 import {
   trigger,
@@ -123,7 +123,7 @@ export class HomePage implements OnInit {
   }
 
   private scrollToFragment() {
-    console.log("scrollToFragment");
+    //console.log("scrollToFragment");
     const fragment = this.router.url.split('#')[1];
 
     if (fragment) {
@@ -221,7 +221,7 @@ export class HomePage implements OnInit {
           this.parceirosList = data;
           this.scrollToFragment();
 
-          const chunkSize = 3;
+          const chunkSize = 5;
           for (let i = 0; i < this.parceirosList.length; i += chunkSize) {
 
             let chunkSizeLast:number = i + chunkSize;
@@ -244,6 +244,8 @@ export class HomePage implements OnInit {
         }
       }
     );
+
+    console.log("this.parceirosSlides",this.parceirosSlides);
   }
 
   public showDescricao(id: number) {
@@ -291,22 +293,33 @@ export class HomePage implements OnInit {
             this.sendMail();
           }
         },
-        error:  (erro) => {
+        error:  (erro:any) => {
           console.error(erro)
         }
       }
     );
   }
 
+  
+  
   private sendMail(){
-    if (this.formGroup.valid) {
+
       // Lógica para enviar o email
       if(this.formGroup.valid){
-        this.homeService.sendMail(this.formGroup.value).subscribe(
+
+        let formData = new FormData();      
+        formData.append('telefone', this.formGroup.get('telefone')?.value);
+        formData.append('assunto', this.formGroup.get('assunto')?.value);
+        formData.append('nome', this.formGroup.get('nome')?.value);
+        formData.append('mensagem', this.formGroup.get('mensagem')?.value);
+        formData.append('remetente', this.formGroup.get('remetente')?.value);
+
+        this.homeService.sendMail(formData).subscribe(
           {
             next:  (data:any) => {
               //console.log('Dados obtidos:', data.message);
               this.util.exibirSucesso(data.message);
+              this.formGroup.reset();
               
              },
             error:  (erro) => {
@@ -319,9 +332,7 @@ export class HomePage implements OnInit {
         this.formGroup.markAllAsTouched();
         this.util.exibirErro("Formulário incompleto");
       }
-    } else {
-      this.formGroup.markAllAsTouched(); // Marca todos os campos como "touched" para exibir os erros
-    }
+
   }
 
   // Função para facilitar a exibição de mensagens de erro

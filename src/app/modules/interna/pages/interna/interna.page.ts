@@ -84,7 +84,7 @@ export class InternaPage implements OnInit {
             this.enviarDenuncia();
           }
         },
-        error:  (erro) => {
+        error:  (erro:any) => {
           console.error(erro)
         }
       }

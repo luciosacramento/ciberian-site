@@ -41,6 +41,7 @@ export class AppComponent {
   }
 
   private scrollToFragment() {
+    console.log("scrollToFragment")
 
     const fragment = this.router.url.split('#')[1];
 

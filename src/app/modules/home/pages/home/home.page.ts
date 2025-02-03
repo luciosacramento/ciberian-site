@@ -147,6 +147,10 @@ export class HomePage implements OnInit {
       this.pageData =  data[1];
       if(this.pageData){
         this.descricaoSolucao = this.pageData[1].conteudo;
+        setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
       }
     });
   }
@@ -154,6 +158,10 @@ export class HomePage implements OnInit {
   private getConfig() {
     this.dataService.currentDataArray.subscribe(data => {
       this.configData =  data[0];
+      setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
     });
   }
 
@@ -163,6 +171,10 @@ export class HomePage implements OnInit {
         next:  (data:any) => {
           //console.log('Dados obtidos solucoesList:', data);
           this.solucoesList = this.splitIntoChunks(data, 6);
+          setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
          // console.log('this.solucoesList:', this.solucoesList);
         },
         error:  (erro) => {
@@ -189,6 +201,10 @@ export class HomePage implements OnInit {
         next:  (data:any) => {
          // console.log('Dados obtidos Documentos:', data);
           this.documentosList = data;
+          setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
         },
         error:  (erro) => {
           console.error(erro)
@@ -204,6 +220,10 @@ export class HomePage implements OnInit {
         next:  (data:any) => {
          // console.log('Dados obtidos colaboradores:', data);
           this.colaboradoresList = data;
+          setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
         },
         error:  (erro) => {
           console.error(erro)
@@ -219,7 +239,10 @@ export class HomePage implements OnInit {
         next:  (data:any) => {
           //console.log('Dados obtidos Parceiros:', data);
           this.parceirosList = data;
-          this.scrollToFragment();
+          setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
 
           const chunkSize = 5;
           for (let i = 0; i < this.parceirosList.length; i += chunkSize) {

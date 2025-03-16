@@ -1,33 +1,54 @@
 
 import { Router } from '@angular/router';
 import { AppComponentService } from './app.component.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { DataService } from './core/data.service';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { RotaService } from './shared/rota-service';
+import { Modal } from 'bootstrap';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
+
+  @ViewChild('meuModal', { static: false }) modalElement!: ElementRef;
+  private modalInstance!: Modal;
 
   public title:string = 'Ciberian';
   public configData: any = [];
   public pageList: any = [];
   public showMenu: boolean = false;
+  pdfUrl: string = 'assets/pdf.pdf'; // Caminho do PDF
+  safePdfUrl: SafeResourceUrl; // URL sanitizada
+
 
   constructor(private router: Router,
     private appService: AppComponentService, 
-    private dataService: DataService,
-    private rotaService: RotaService) {
+    private dataService: DataService, 
+    private sanitizer: DomSanitizer) {
+
+      this.safePdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.pdfUrl);
     
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
 
+    if (this.modalElement) {
+      this.modalInstance = new Modal(this.modalElement.nativeElement);
+
+      if (this.modalInstance) {
+        this.modalInstance.show();
+      }
+    }
+  }
+
+  ngOnInit(): void {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -36,13 +57,13 @@ export class AppComponent {
       }, 2000);
       
     });
+
     
     this.getConfig();
   }
 
   private scrollToFragment() {
-    console.log("scrollToFragment")
-
+ 
     const fragment = this.router.url.split('#')[1];
 
     if (fragment) {

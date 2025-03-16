@@ -1,5 +1,24 @@
 <div class="site-wrapper">   
 
+    <!-- Modal -->
+    <!-- Adicionando um ID ao modal -->
+    <div *ngIf="true" class="modal fade" id="meuModal" #meuModal tabindex="-1" aria-labelledby="meuModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="meuModalLabel">FATO RELEVANTE</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div *ngIf="pdfUrl" class="modal-body">
+                <iframe [src]="safePdfUrl" width="100%" style="height: 65vh;"></iframe>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- fim Modal -->
   
 
   <header class="header-holder">             

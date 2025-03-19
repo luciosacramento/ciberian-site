@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit{
   public configData: any = [];
   public pageList: any = [];
   public showMenu: boolean = false;
-  pdfUrl: string = 'assets/pdf.pdf'; // Caminho do PDF
+  pdfUrl: string = 'assets/Fato_Relevante_Ciberian_V5.pdf'; // Caminho do PDF
   safePdfUrl: SafeResourceUrl; // URL sanitizada
 
 

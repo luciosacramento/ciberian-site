@@ -12,7 +12,6 @@ export class InternaService {
 
   public sendDenuncia(formData:FormData){
 
-    console.log('FormData:',formData.getAll("nome") );  
     return this.http.post('https://www2.ciberian.com.br/wp-content/themes/ciberian/php/enviar_denuncia.php', formData);
 
   }

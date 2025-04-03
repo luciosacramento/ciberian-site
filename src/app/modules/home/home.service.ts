@@ -32,6 +32,10 @@ export class HomeService {
     return this.server.get(environment.API_url,`parceiros`);
   }
 
+  public getCertificados(){
+    return this.server.get(environment.API_url,`certificados`);
+  }
+
 
   verifyReCaptcha(TOKEN : string): any {
 

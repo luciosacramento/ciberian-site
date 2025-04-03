@@ -189,10 +189,56 @@
                 </div>                        
             </div>
 
+            <!-- Certificados -->
+            <div id="{{pageData[5].slug}}"  class="section full-screen full-width">
+                <div class="section-wrapper block content-1170 center-relative">
+                    <div class="content-wrapper">
+
+                        <h2 class="entry-title"> 
+                            {{pageData[5].titulo}}
+                        </h2>
+                        <p class="page-desc" [innerHTML]="sanitize(pageData[5].resumo)">
+                        </p>
+
+                        <div class="section-content-holder m-auto">
+                            <div class="content-wrapper">
+                                <div id="team-holder">
+                                    <div class="team-load-content-holder"></div>
+                                   
+                                    <div id="carouselCertificados" class="carousel slide m-auto">
+                                        <div class="carousel-inner">
+                                            <!-- Adiciona o layout para três imagens por slide -->
+                                            <div *ngFor="let slide of certificadosSlides; let i = index" class="carousel-item" [class.active]="i === 0">
+                                                <div class="row">
+                                                    <div class="col-3" *ngFor="let image of slide">
+                                                        <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <!-- Controles do Carousel -->
+                                        <button *ngIf="certificadosSlides.length>1" class="carousel-control-prev end-2" type="button" data-bs-target="#carouselCertificados" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button *ngIf="certificadosSlides.length>1" class="carousel-control-next" type="button" data-bs-target="#carouselCertificados" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="clear"></div>                                        
+                                </div>                                    
+                            </div>                                
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Parceirias -->
-
-            <!-- Inspire -->
             <div id="{{pageData[3].slug}}"  class="section full-screen full-width">
                 <div class="section-wrapper block content-1170 center-relative">
                     <div class="content-wrapper">
@@ -238,60 +284,7 @@
                         
                     </div>
                 </div>
-            </div>
-
-
-            <!--div id="{{pageData[3].slug}}" class="section page-split" *ngIf="parceirosSlides">
-                <div class="section-wrapper block content-1170 center-relative">
-                    <div class="bg-holder float-left">
-                        <div class="split-color"></div>                                
-                    </div>
-                    <div class="sticky-spacer">
-                        <div class="section-title-holder float-left">
-
-                            <h2 class="entry-title"> 
-                                {{pageData[3].titulo}}
-                            </h2>
-                            <p class="page-desc" [innerHTML]="sanitize(pageData[3].resumo)">
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="section-content-holder float-right">
-                        <div class="content-wrapper">
-                            <div id="team-holder">
-                                <div class="team-load-content-holder"></div>
-                               
-                                <div id="carouselParceiros" class="carousel slide">
-                                    <div class="carousel-inner">
-                                        <!-- Adiciona o layout para três imagens por slide --
-                                        <div *ngFor="let slide of parceirosSlides; let i = index" class="carousel-item" [class.active]="i === 0">
-                                            <div class="row">
-                                                <div class="col-4" *ngFor="let image of slide">
-                                                    <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <!-- Controles do Carousel --
-                                    <button class="carousel-control-prev end-2" type="button" data-bs-target="#carouselParceiros" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselParceiros" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
-                                </div>
-                                
-                                <div class="clear"></div>                                        
-                            </div>                                    
-                        </div>                                
-                    </div>
-                    <div class="clear"></div>                           
-                </div>                        
-            </div>
+            </div>         
 
             <!-- Contact -->
             <div id="{{pageData[4].slug}}" class="section page-split">

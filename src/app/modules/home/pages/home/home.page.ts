@@ -61,6 +61,8 @@ export class HomePage implements OnInit {
   public colaboradoresList: any | null = null;
   public parceirosList:any | null = [];
   public parceirosSlides:any | null = [];
+  public certificadosList:any | null = [];
+  public certificadosSlides:any | null = [];
   public descricaoColaborador: string | null = null;
   public descricaoSolucao: string | null = null;
   public selectedIndex: number | null = null;
@@ -108,6 +110,7 @@ export class HomePage implements OnInit {
     this.getDocumentos();
     this.getColaboradores();
     this.getParceiros();
+    this.getCertificados();
   
 
     this.formGroup = this.fb.group({
@@ -269,6 +272,44 @@ export class HomePage implements OnInit {
     );
 
     console.log("this.parceirosSlides",this.parceirosSlides);
+  }
+
+  //getCertificados
+
+  public getCertificados() {
+    this.homeService.getCertificados().subscribe(
+      {
+        next:  (data:any) => {
+          //console.log('Dados obtidos Parceiros:', data);
+          this.certificadosList = data;
+          setTimeout(() => {
+        this.scrollToFragment();
+      }, 2000);
+      
+
+          const chunkSize = 5;
+          for (let i = 0; i < this.certificadosList.length; i += chunkSize) {
+
+            let chunkSizeLast:number = i + chunkSize;
+            // console.log(this.certificadosList.slice(i, chunkSizeLast));
+            
+            if(i + chunkSize > this.certificadosList.length){
+              chunkSizeLast = this.certificadosList.length;
+            }
+           // console.log(i,chunkSizeLast);
+
+              this.certificadosSlides.push(this.certificadosList.slice(i, chunkSizeLast));
+
+          }
+
+
+        },
+        error:  (erro) => {
+          console.error(erro)
+        }
+      }
+    );
+
   }
 
   public showDescricao(id: number) {

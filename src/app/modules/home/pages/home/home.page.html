@@ -155,9 +155,9 @@
                             <div id="team-holder">
                                 <div class="team-load-content-holder"></div>
                                
-                                <div id="carouselExampleControls" class="carousel slide" >
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="300" >
                                     <div class="carousel-inner">
-                                      <div *ngFor="let image of colaboradoresList; let i = index" class="carousel-item" [class.active]="i === 0">
+                                      <div *ngFor="let image of colaboradoresList; let i = index" class="carousel-item" [class.active]="i === 0" >
                                         <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
                                         
                                         <!-- Título e descrição sobre a imagem -->
@@ -205,7 +205,7 @@
                                 <div id="team-holder">
                                     <div class="team-load-content-holder"></div>
                                    
-                                    <div id="carouselCertificados" class="carousel slide m-auto">
+                                    <div id="carouselCertificados" class="carousel slide m-auto" data-bs-ride="carousel" data-bs-interval="300">
                                         <div class="carousel-inner">
                                             <!-- Adiciona o layout para três imagens por slide -->
                                             <div *ngFor="let slide of certificadosSlides; let i = index" class="carousel-item" [class.active]="i === 0">
@@ -254,7 +254,7 @@
                                 <div id="team-holder">
                                     <div class="team-load-content-holder"></div>
                                    
-                                    <div id="carouselParceiros" class="carousel slide m-auto">
+                                    <div id="carouselParceiros" class="carousel slide m-auto" data-bs-ride="carousel" data-bs-interval="300">
                                         <div class="carousel-inner">
                                             <!-- Adiciona o layout para três imagens por slide -->
                                             <div *ngFor="let slide of parceirosSlides; let i = index" class="carousel-item" [class.active]="i === 0">

@@ -1,5 +1,5 @@
 import { environment } from 'src/environment/environment';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HomeService } from '../../home.service';
 import { map } from 'rxjs';
 import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -19,6 +19,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { ActivatedRoute } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import * as bootstrap from 'bootstrap';
 
 
 
@@ -68,6 +69,7 @@ export class HomePage implements OnInit {
   public selectedIndex: number | null = null;
   public chaveCaptcha:string = environment.chaveCaptcha;
   public captchaResolved = false;
+  @ViewChild('carouselExampleControls') meuElementoRef!: ElementRef;
   
 
   public customOptions: OwlOptions = {
@@ -215,6 +217,20 @@ export class HomePage implements OnInit {
       }
     );
   }
+  
+  /*ngAfterViewInit() {
+    //const myCarousel = document.querySelector('#carouselExampleControls')
+
+          const el = this.meuElementoRef.nativeElement;
+        //  el.scrollIntoView(); // exemplo de uso
+          
+
+          new bootstrap.Carousel(el!, {
+            interval: 2000,
+            wrap: false,
+            ride: true
+          })
+  }*/
 
   //get colaboradores
   public getColaboradores() {
@@ -223,6 +239,7 @@ export class HomePage implements OnInit {
         next:  (data:any) => {
          // console.log('Dados obtidos colaboradores:', data);
           this.colaboradoresList = data;
+
           setTimeout(() => {
         this.scrollToFragment();
       }, 2000);

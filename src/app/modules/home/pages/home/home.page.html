@@ -154,13 +154,27 @@
                         <div class="content-wrapper">
                             <div id="team-holder">
                                 <div class="team-load-content-holder"></div>
+
+                                <ngb-carousel *ngIf="colaboradoresList && colaboradoresList.length">
+                                    <ng-template ngbSlide *ngFor="let image of colaboradoresList; let i = index">
+                                        <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
+                                        
+                                        <!-- Título e descrição sobre a imagem -->
+                                        <div class="carousel-caption d-md-block">
+                                          <div class="overlay">
+                                            <h4 class="p-0 m-2">{{ image.title }}</h4>
+                                            <p [innerHTML]="image.description"></p>
+                                          </div>
+                                        </div>
+                                    </ng-template>
+                                  </ngb-carousel>
                                
-                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="300" >
+                                <!--div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="300" >
                                     <div class="carousel-inner">
                                       <div *ngFor="let image of colaboradoresList; let i = index" class="carousel-item" [class.active]="i === 0" >
                                         <img [src]="image.image_url" class="d-block w-100" [alt]="image.title">
                                         
-                                        <!-- Título e descrição sobre a imagem -->
+                                        <!-- Título e descrição sobre a imagem --
                                         <div class="carousel-caption d-md-block">
                                           <div class="overlay">
                                             <h4 class="p-0 m-2">{{ image.title }}</h4>
@@ -171,7 +185,7 @@
                                     </div>
                                                                    
                                     
-                                    <!-- Controles do Carousel -->
+                                    <!-- Controles do Carousel --
                                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
@@ -180,7 +194,7 @@
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Next</span>
                                     </button>
-                                    </div>  
+                                    </div-->  
                                 <div class="clear"></div>                                        
                             </div>                                    
                         </div>                                

@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { InternaModule } from './modules/interna/interna.module';
 import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from 'src/environment/environment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localePt);
 
@@ -47,6 +48,7 @@ registerLocaleData(localePt);
     InternaModule,
     HttpClientModule,
     RecaptchaV3Module,
+    NgbModule,
   ],
   providers: [
     {

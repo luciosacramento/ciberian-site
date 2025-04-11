@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HomePage } from './pages/home/home.page';
 import { HomeRoutingModule } from './home-routing.module';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CommonModule,
     SharedModule,
     HomeRoutingModule,
-    CarouselModule
+    CarouselModule,
+    NgbCarouselModule
   ]
 })
 export class HomeModule {

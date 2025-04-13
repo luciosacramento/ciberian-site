@@ -36,7 +36,7 @@
     "@angular-devkit/build-angular": "^16.1.4",
     "@angular/cli": "~16.1.4",
     "@angular/compiler-cli": "^16.1.0",
-    "@angular/localize": "^16.1.0",
+    "@angular/localize": "16.1.5",
     "@types/bootstrap": "^5.2.10",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
@@ -47,4 +47,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.1.3"
   }
+  
 }

@@ -9,8 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class AppComponentService {
   constructor(private rest:RestService) { }
 
-  public obterPaginas():any {
-    return this.rest.get(environment.API_url,`paginas`);
+  public obterPaginas(menu:string):any {
+    return this.rest.get(environment.API_url,`paginas?menu=${menu}`);
    // return this.rest.get("http://api-hml.tcm.ba.gov.br", `/portal-servidor/recadastramento/nacionalidades`);
   }
 

@@ -509,7 +509,7 @@ body .sm-clean li.current_page_item > a {
     background-color: $color-dourado;
 }
 
-#nosso-time  {
+#nosso-time, #certificados  {
     background-color: $color-cinza-claro;
     color: $color-dark-grey;
 
@@ -519,7 +519,7 @@ body .sm-clean li.current_page_item > a {
 }
 
 
-#nosso-time .split-color {
+#nosso-time .split-color, #certificados .split-color{
     background-color: $color-cinza-medio;
 }
 
@@ -2053,3 +2053,21 @@ footer ul {
 }
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+.carousel-control-next{
+    right: -100px;
+}
+
+.carousel-control-prev{
+    left: -100px;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: #00000070;
+    border-radius: 100%;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 50%;
+}
+

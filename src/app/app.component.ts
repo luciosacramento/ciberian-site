@@ -109,7 +109,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   private getPages() {
-    this.appService.obterPaginas().subscribe(
+    this.appService.obterPaginas('menu-homologacao').subscribe(
       {
         next:  (data:any) => {
           console.log('Dados obtidos:', data);

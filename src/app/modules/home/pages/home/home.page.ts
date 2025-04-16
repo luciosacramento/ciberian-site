@@ -304,7 +304,7 @@ export class HomePage implements OnInit {
       }, 2000);
       
 
-          const chunkSize = 5;
+          const chunkSize = 4;
           for (let i = 0; i < this.certificadosList.length; i += chunkSize) {
 
             let chunkSizeLast:number = i + chunkSize;

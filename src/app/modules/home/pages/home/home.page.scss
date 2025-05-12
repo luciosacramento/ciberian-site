@@ -26,9 +26,13 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Retângulo preto transparente */
   color: white;
-  padding: 10px;
+  padding: 10px 10px 60px 10px;
   text-align: center;
   margin: auto;
+}
+
+.carousel-indicators {
+    bottom: -10px;
 }
 
 .overlay h5, .overlay p {

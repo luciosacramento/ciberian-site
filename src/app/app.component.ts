@@ -52,11 +52,15 @@ export class AppComponent implements AfterViewInit{
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth' // Faz o scroll de forma suave
-      });
-  
+      const fragment = this.router.url.split('#')[1];
+      const element = document.getElementById(fragment);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        window.scrollTo({
+          top: rect.top + window.pageYOffset,
+          behavior: 'smooth' // Faz o scroll de forma suave
+        });
+      }
       setTimeout(() => {
         this.scrollToFragment();
       }, 2000);

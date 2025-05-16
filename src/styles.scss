@@ -180,6 +180,10 @@ body pre {
     width: 22px;
 }
 
+.font-light{
+    color: $color-cinza-claro;
+}
+
 #toggle .second-menu-line {
     -webkit-transition: -webkit-transform 0.3s ease;
     transition: transform 0.3s ease;    

@@ -123,5 +123,12 @@ export class InternaPage implements OnInit {
       this.util.exibirErro('Formulário inválido');
     }
   }
+
+
+  public sanitize(str:string) {
+    return this.util.sanitize(str);
+  }
+
+ 
   
 }

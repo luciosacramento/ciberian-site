@@ -93,12 +93,22 @@ export class InternaPage implements OnInit {
 
   enviarDenuncia() {
     if (this.denunciaForm && this.denunciaForm.valid) {
-        this.internaService.sendDenuncia(this.denunciaForm.value).subscribe(
+
+
+        let formData = new FormData();      
+        formData.append('sobrenome', this.denunciaForm.get('sobrenome')?.value);
+        formData.append('email', this.denunciaForm.get('email')?.value);
+        formData.append('nome', this.denunciaForm.get('nome')?.value);
+        formData.append('comentario', this.denunciaForm.get('comentario')?.value);
+
+
+        this.internaService.sendDenuncia(formData).subscribe(
           {
             next:  (data:any) => {
               //console.log('Dados obtidos:', data.message);
              // this.verifyReCaptcha(data);
               this.util.exibirSucesso(data.message);
+              this.denunciaForm!.reset();
               
             },
             error:  (erro) => {
@@ -113,12 +123,5 @@ export class InternaPage implements OnInit {
       this.util.exibirErro('Formulário inválido');
     }
   }
-
-
-  public sanitize(str:string) {
-    return this.util.sanitize(str);
-  }
-
- 
   
 }
